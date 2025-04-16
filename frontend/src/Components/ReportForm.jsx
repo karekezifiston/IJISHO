@@ -2,6 +2,8 @@ import React, { useState, useRef } from 'react';
 import './ReportForm.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMicrophone, faStop } from '@fortawesome/free-solid-svg-icons';
+import { faHandshake } from '@fortawesome/free-solid-svg-icons';
+
 
 
 const ReportForm = () => {
@@ -69,7 +71,15 @@ const ReportForm = () => {
 
   return (
     <form onSubmit={handleSubmit} className="report-form">
-      <h2>Tanga amakuru ku cyaha</h2>
+      <h2>
+        Tanga amakuru ku cyaha{" "}
+        <FontAwesomeIcon
+          icon={faHandshake}
+          style={{ color: '#ffffffd6' }}
+          size="lg" // or "2x", "3x", "4x" for bigger
+        />
+      </h2>
+
 
       <label>District:</label>
       <input name="district" value={formData.district} onChange={handleChange} required />
@@ -92,14 +102,14 @@ const ReportForm = () => {
 
 
 
-      <label>Fata Amajwi niba utanditse:</label>
+      <label>Fata Amajwi usobanure:</label>
       {recording ? (
         <button type="button" onClick={handleStopRecording}>
           Stop <FontAwesomeIcon icon={faStop} style={{ color: 'red' }} />
         </button>
       ) : (
         <button type="button" onClick={handleStartRecording}>
-          Fata Amajwi <FontAwesomeIcon icon={faMicrophone}style={{ color: 'red' }} />
+          Tangira <FontAwesomeIcon icon={faMicrophone} style={{ color: 'red' }} />
         </button>
       )}
 
