@@ -1,9 +1,13 @@
+// src/components/ReportForm.js
 import React, { useState, useRef } from 'react';
 import './ReportForm.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMicrophone, faStop, faHandshake } from '@fortawesome/free-solid-svg-icons';
+import { useTranslation } from 'react-i18next';
 
 const ReportForm = () => {
+  const { t } = useTranslation();
+
   const [formData, setFormData] = useState({
     description: '',
     district: '',
@@ -54,7 +58,7 @@ const ReportForm = () => {
     e.preventDefault();
 
     if (!formData.description.trim() && !formData.audio) {
-      alert("Please either write a report or record a voice note.");
+      alert(t("report_alert"));
       return;
     }
 
@@ -65,49 +69,49 @@ const ReportForm = () => {
   return (
     <form onSubmit={handleSubmit} className="report-form">
       <h2>
-        Tanga amakuru ku cyaha{" "}
+        {t("report_title")}{" "}
         <FontAwesomeIcon icon={faHandshake} style={{ color: '#ffffffd6' }} size="lg" />
       </h2>
 
-      <label>District:</label>
+      <label>{t("district")}</label>
       <input name="district" value={formData.district} onChange={handleChange} required />
 
-      <label>Sector:</label>
+      <label>{t("sector")}</label>
       <input name="sector" value={formData.sector} onChange={handleChange} required />
 
-      <label>Cell:</label>
+      <label>{t("cell")}</label>
       <input name="cell" value={formData.cell} onChange={handleChange} required />
 
-      <label>Byabaye ryari?</label>
+      <label>{t("date")}</label>
       <input type="datetime-local" name="dateTime" value={formData.dateTime} onChange={handleChange} required />
 
-      <label>Waba ufite amashusho cg amafoto waduha?</label>
+      <label>{t("media")}</label>
       <input type="file" name="media" onChange={handleChange} />
 
-      <label>Sobanura uko byagenze cg wifate amajwi udusobanurira hasi:</label>
+      <label>{t("description")}</label>
       <textarea
         name="description"
         value={formData.description}
         onChange={handleChange}
-        placeholder="Tangira wandike usobanura niba utari bufate amajwi..."
+        placeholder={t("description_placeholder")}
       />
+
       <div>
-        <label>Fata Amajwi usobanure:</label>
+        <label>{t("record_audio")}</label>
         {recording ? (
           <button type="button" onClick={handleStopRecording}>
-            Stop <FontAwesomeIcon icon={faStop} style={{ color: 'red' }} />
+            {t("stop")} <FontAwesomeIcon icon={faStop} style={{ color: 'red' }} />
           </button>
         ) : (
           <button type="button" onClick={handleStartRecording}>
-            Tangira <FontAwesomeIcon icon={faMicrophone} style={{ color: 'red' }} />
+            {t("start")} <FontAwesomeIcon icon={faMicrophone} style={{ color: 'red' }} />
           </button>
         )}
       </div>
 
-
       {formData.audio && (
         <div>
-          <p>Amajwi wafashe:</p>
+          <p>{t("audio_taken")}</p>
           <audio controls>
             <source src={URL.createObjectURL(formData.audio)} type="audio/webm" />
           </audio>
@@ -116,17 +120,17 @@ const ReportForm = () => {
 
       {/* Optional Identity */}
       <label style={{ marginTop: '20px' }}>
-        Niba ushaka kwivuga imyirondoro yawe
+        {t("contact_optional")}
       </label>
       <input
         type="text"
         name="contact"
         value={formData.contact}
         onChange={handleChange}
-        placeholder="E.g., 078... or email@example.com"
+        placeholder={t("contact_placeholder")}
       />
 
-      <button type="submit">Ohereza</button>
+      <button type="submit">{t("submit")}</button>
     </form>
   );
 };
