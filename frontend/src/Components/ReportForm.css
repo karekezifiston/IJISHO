@@ -1,35 +1,103 @@
 .report-form {
-    margin: auto;
-    padding: 20px;
-    background: #080808 ;
-    border-radius: 10px;
-    width:80%;
+  margin: auto;
+  padding: 20px;
+  background: #080808;
+  border-radius: 10px;
+  width: 80%;
+}
+
+.report-form h2 {
+  text-align: center;
+  font-size: 30px;
+  font-weight: 800;
+  text-transform: uppercase;
+  color: #ffffffd6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+
+.report-form input,
+.report-form textarea {
+  width: 100%;
+  margin-bottom: 25px;
+  margin-top: 7px;
+  padding: 15px;
+  border: none;
+  background-color: #2e2e2e86;
+  border-radius: 4px;
+}
+
+label {
+  font-weight: 400;
+  padding-right: 10px;
+  color: rgba(229, 229, 229, 0.781);
+}
+
+.report-form button {
+  margin-bottom: 15px;
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+.report-form button {
+  background-color:gray;
+  color: rgba(255, 255, 255, 0.831);
+  border: none;
+  font-weight:700;
+  cursor: pointer;
+}
+
+.report-form button:hover {
+  background-color: #1c5dad;
+}
+
+@media(max-width:1051px) {
+  .report-form {
+    width: 100%;
   }
-  .report-form h2{
+
+  .report-form h2 {
     text-align: center;
-    font-size:30px;
-    font-weight:800;
+    font-size: 20px;
+    font-weight: 800;
     text-transform: uppercase;
     color: #ffffffd6;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap:20px;
+    gap: 20px;
+    padding-bottom: 20px;
+  }
+
+  label {
+    font-size: 15px;
+  }
+
+  .button {
+    font-size: 14px;
+  }
+}
+
+@media(max-width:505px) {
+  .report-form h2 {
+    font-size: 15px;
+    gap: 5px;
+    flex-direction: column;
+  }
+
+  label {
+    font-size: 13px;
+    font-weight: 600;
   }
 
   .report-form input,
   .report-form textarea {
-    width: 100%;
-    margin-bottom:25px;
-    margin-top:7px;
-    padding: 15px;
-    border:none;
-    background-color: #2e2e2e86;
-    border-radius:4px;
+    padding: 10px;
   }
-  label{
-    font-weight:400;
-    padding-right:10px;
-    color: rgba(229, 229, 229, 0.781);
+
+  .button {
+    font-size: 14px;
   }
-  
+}

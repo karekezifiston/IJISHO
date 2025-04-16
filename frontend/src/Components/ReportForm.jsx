@@ -1,10 +1,7 @@
 import React, { useState, useRef } from 'react';
 import './ReportForm.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faMicrophone, faStop } from '@fortawesome/free-solid-svg-icons';
-import { faHandshake } from '@fortawesome/free-solid-svg-icons';
-
-
+import { faMicrophone, faStop, faHandshake } from '@fortawesome/free-solid-svg-icons';
 
 const ReportForm = () => {
   const [formData, setFormData] = useState({
@@ -15,8 +12,7 @@ const ReportForm = () => {
     dateTime: '',
     media: null,
     audio: null,
-    anonymous: true,
-    contact: ''
+    contact: '' // Optional
   });
 
   const [recording, setRecording] = useState(false);
@@ -24,17 +20,16 @@ const ReportForm = () => {
   const audioChunksRef = useRef([]);
 
   const handleChange = (e) => {
-    const { name, value, type, files, checked } = e.target;
+    const { name, value, type, files } = e.target;
     setFormData(prev => ({
       ...prev,
-      [name]: type === 'file' ? files[0] : (type === 'checkbox' ? checked : value)
+      [name]: type === 'file' ? files[0] : value
     }));
   };
 
   const handleStartRecording = async () => {
     const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
     mediaRecorderRef.current = new MediaRecorder(stream);
-
     audioChunksRef.current = [];
 
     mediaRecorderRef.current.ondataavailable = (e) => {
@@ -58,28 +53,21 @@ const ReportForm = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // Ensure at least description or audio is filled
     if (!formData.description.trim() && !formData.audio) {
       alert("Please either write a report or record a voice note.");
       return;
     }
 
     console.log('Form Data:', formData);
-
-    // You can send data here (including audio)
+    // Send the formData to your server here.
   };
 
   return (
     <form onSubmit={handleSubmit} className="report-form">
       <h2>
         Tanga amakuru ku cyaha{" "}
-        <FontAwesomeIcon
-          icon={faHandshake}
-          style={{ color: '#ffffffd6' }}
-          size="lg" // or "2x", "3x", "4x" for bigger
-        />
+        <FontAwesomeIcon icon={faHandshake} style={{ color: '#ffffffd6' }} size="lg" />
       </h2>
-
 
       <label>District:</label>
       <input name="district" value={formData.district} onChange={handleChange} required />
@@ -93,25 +81,29 @@ const ReportForm = () => {
       <label>Byabaye ryari?</label>
       <input type="datetime-local" name="dateTime" value={formData.dateTime} onChange={handleChange} required />
 
-      <label>Waba ufite amashusho cg amafoto waduha ?</label>
+      <label>Waba ufite amashusho cg amafoto waduha?</label>
       <input type="file" name="media" onChange={handleChange} />
 
       <label>Sobanura uko byagenze cg wifate amajwi udusobanurira hasi:</label>
-      <textarea name="description" value={formData.description} onChange={handleChange} placeholder="Tangira wandike usobanura niba utari bufate amajwi..." />
+      <textarea
+        name="description"
+        value={formData.description}
+        onChange={handleChange}
+        placeholder="Tangira wandike usobanura niba utari bufate amajwi..."
+      />
+      <div>
+        <label>Fata Amajwi usobanure:</label>
+        {recording ? (
+          <button type="button" onClick={handleStopRecording}>
+            Stop <FontAwesomeIcon icon={faStop} style={{ color: 'red' }} />
+          </button>
+        ) : (
+          <button type="button" onClick={handleStartRecording}>
+            Tangira <FontAwesomeIcon icon={faMicrophone} style={{ color: 'red' }} />
+          </button>
+        )}
+      </div>
 
-
-
-
-      <label>Fata Amajwi usobanure:</label>
-      {recording ? (
-        <button type="button" onClick={handleStopRecording}>
-          Stop <FontAwesomeIcon icon={faStop} style={{ color: 'red' }} />
-        </button>
-      ) : (
-        <button type="button" onClick={handleStartRecording}>
-          Tangira <FontAwesomeIcon icon={faMicrophone} style={{ color: 'red' }} />
-        </button>
-      )}
 
       {formData.audio && (
         <div>
@@ -122,18 +114,17 @@ const ReportForm = () => {
         </div>
       )}
 
-
-      <label>
-        <input type="checkbox" name="anonymous" checked={formData.anonymous} onChange={handleChange} />
-        Submit Anonymously
+      {/* Optional Identity */}
+      <label style={{ marginTop: '20px' }}>
+        Niba ushaka kwivuga imyirondoro yawe
       </label>
-
-      {!formData.anonymous && (
-        <>
-          <label>Contact Info:</label>
-          <input name="contact" value={formData.contact} onChange={handleChange} />
-        </>
-      )}
+      <input
+        type="text"
+        name="contact"
+        value={formData.contact}
+        onChange={handleChange}
+        placeholder="E.g., 078... or email@example.com"
+      />
 
       <button type="submit">Ohereza</button>
     </form>
