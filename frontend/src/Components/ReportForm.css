@@ -15,6 +15,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  padding-bottom:25px;
   gap: 20px;
 }
 
@@ -85,6 +86,7 @@ label {
     font-size: 15px;
     gap: 5px;
     flex-direction: column;
+    padding-bottom:5px;
   }
 
   label {
