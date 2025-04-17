@@ -1,0 +1,15 @@
+.footer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top:1rem;
+    gap:2px;
+}
+.footer h2{
+    font-size:14px;
+    color: rgba(229, 229, 229, 0.781);;
+}
+.footer h3{
+    font-size:13px;
+    color: rgba(229, 229, 229, 0.402);;
+}
