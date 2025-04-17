@@ -96,18 +96,19 @@ const ReportForm = () => {
         placeholder={t("description_placeholder")}
       />
 
-      <div>
+      <div className="audio-controls">
         <label>{t("record_audio")}</label>
         {recording ? (
-          <button type="button" onClick={handleStopRecording}>
-            {t("stop")} <FontAwesomeIcon icon={faStop} style={{ color: 'red' }} />
+          <button type="button" className="whatsapp-button stop" onClick={handleStopRecording}>
+            Stop
           </button>
         ) : (
-          <button type="button" onClick={handleStartRecording}>
-            {t("start")} <FontAwesomeIcon icon={faMicrophone} style={{ color: 'red' }} />
+          <button type="button" className="whatsapp-button record" onClick={handleStartRecording}>
+            <FontAwesomeIcon icon={faMicrophone} />
           </button>
         )}
       </div>
+
 
       {formData.audio && (
         <div>

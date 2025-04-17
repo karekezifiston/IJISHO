@@ -35,15 +35,52 @@ label {
   padding-right: 10px;
   color: rgba(229, 229, 229, 0.781);
 }
+.audio-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.whatsapp-button {
+  border: none;
+  padding: 12px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 18px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  color: white;
+  transition: all 0.3s ease;
+  height: 40px;
+  width:70px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.whatsapp-button.record {
+  /* background-color:transparent; */
+  border:solid 1px rgba(255, 255, 255, 0.279);
+}
+
+.whatsapp-button.stop {
+  background-color:red;
+  border:none;
+}
+
+.whatsapp-button:hover {
+  opacity: 0.9;
+  transform: scale(1.05);
+}
+
 
 .report-form button {
   margin-bottom: 15px;
-  padding: 10px;
+  padding-left: 10px;
+  padding-right:10px;
   border-radius: 6px;
   border: 1px solid #ccc;
 }
 .report-form button {
-  background-color:gray;
   color: rgba(255, 255, 255, 0.831);
   border: none;
   font-weight:700;
@@ -51,7 +88,7 @@ label {
 }
 
 .report-form button:hover {
-  background-color: #1c5dad;
+  background-color: #cccccc18;
 }
 
 @media(max-width:1051px) {
