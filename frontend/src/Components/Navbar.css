@@ -34,5 +34,94 @@
     outline: none;
     cursor: pointer;
   }
-  
+  /* Burger icon hidden on large screens */
+.burger {
+  display: none;
+  /* font-size: 24px; */
+  cursor: pointer;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .burger {
+    display: block;
+    z-index: 1001;
+    padding: 10px;
+    font-size: 24px;
+  }
+  .custom-burger-icon {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    width: 30px;
+  }
+
+  .custom-burger-icon span {
+    display: block;
+    height:2px;
+    width: 100%;
+    background-color: #efefefc1;
+    border-radius: 5px;
+  }
+
+  .burger.open {
+    font-size: 25px;
+    color:#efefefc1;
+  }
+
+  .nav-links {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 15vh;
+    left: 0;
+    width: 100%;
+    background-color: white;
+    gap: 10px;
+    padding: 20px;
+    z-index: 10;
+  }
+
+  .nav-links.mobile-menu {
+    display: flex;
+  }
+
+  .language-switcher {
+    position: absolute;
+    top: 5px;
+    right: 10px;
+  }
+}
+/* Hide language switcher inside menu on desktop */
+.mobile-lang {
+  display: none;
+}
+
+/* Hide top-right desktop switcher on mobile */
+.desktop-lang {
+  display: block;
+}
+
+@media (max-width: 768px) {
+  .nav-links {
+    /* already defined styles */
+    padding-bottom: 30px;
+  }
+
+  .mobile-lang {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+  }
+
+  .desktop-lang {
+    display: none;
+  }
+
+  .lang-select {
+    width: 100%;
+    max-width: 200px;
+  }
+}
+
   
