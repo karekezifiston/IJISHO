@@ -47,6 +47,29 @@ const resources = {
       "submit": "Ohereza",
       "report_alert": "Nyamuneka wandike ibisobanuro cyangwa ufate amajwi."
     }
+  },
+
+  fr: {
+    translation: {
+      "home": "Accueil",
+      "about": "À propos",
+      "report_title": "Signaler un crime",
+      "district": "District",
+      "sector": "Secteur",
+      "cell": "Cellule",
+      "date": "Quand cela s'est-il produit ?",
+      "media": "Avez-vous des photos ou des vidéos ?",
+      "description": "Décrivez ce qui s'est passé ou enregistrez un audio ci-dessous :",
+      "description_placeholder": "Commencez à taper votre rapport si vous n'enregistrez pas...",
+      "record_audio": "Enregistrer une explication audio :",
+      "start": "Démarrer",
+      "stop": "Arrêter",
+      "audio_taken": "Audio enregistré :",
+      "contact_optional": "Si vous souhaitez révéler votre identité, entrez vos coordonnées ci-dessous :",
+      "contact_placeholder": "Par ex. 078... ou email@example.com",
+      "submit": "Soumettre",
+      "report_alert": "Veuillez soit écrire un rapport, soit enregistrer un message vocal."
+    }
   }
 };
 

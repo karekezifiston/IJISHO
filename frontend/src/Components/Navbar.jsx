@@ -35,6 +35,7 @@ const Navbar = () => {
         >
           <option value="rw">🇷🇼 Kinyarwanda</option>
           <option value="en">🇬🇧 English</option>
+          <option value="fr">🇫🇷 Français</option>
         </select>
       </div>
     </nav>
