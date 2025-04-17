@@ -3,6 +3,7 @@
     flex-direction: column;
     align-items: center;
     padding-top:1rem;
+    padding-bottom:1rem;
     gap:2px;
 }
 .footer h2{
