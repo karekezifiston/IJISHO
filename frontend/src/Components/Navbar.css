@@ -4,6 +4,9 @@
     align-items: center; 
     height:15vh;
     padding:30px 0px;
+    width: 100%;
+    position: relative;
+    overflow: hidden;
 }
 .nav-links{
     display: flex;

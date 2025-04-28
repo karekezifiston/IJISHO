@@ -20,7 +20,7 @@ const resources = {
       "start": "Start",
       "stop": "Stop",
       "audio_taken": "Audio recorded:",
-      "contact_optional": "Would it be possible to give us your phone number or email to assist you (in case we do not fully understand)? Please write it below:",
+      "contact_optional":"If possible, could you provide us with your phone number or email to assist us (in case we do not fully understand)? Please write it below:",
       "contact_placeholder": "E.g., 078... or email@example.com",
       "submit": "Submit",
       "report_alert": "Please either write a report or record a voice note."
@@ -42,7 +42,7 @@ const resources = {
       "start": "Tangira",
       "stop": "Hagarika",
       "audio_taken": "Amajwi wafashe:",
-      "contact_optional": "Ese byashoboka ko Waduha nimero cg email byadufasha(mugihe nutasobanukiwe neza),andika hasi:",
+      "contact_optional": "Niba binashoboka ushobora kuduha nimero cg email byadufasha(mugihe nutasobanukiwe neza),andika hasi:",
       "contact_placeholder": "Urugero, 078... cyangwa email@example.com",
       "submit": "Ohereza",
       "report_alert": "Nyamuneka wandike ibisobanuro cyangwa ufate amajwi."
@@ -65,7 +65,7 @@ const resources = {
       "start": "Démarrer",
       "stop": "Arrêter",
       "audio_taken": "Audio enregistré :",
-      "contact_optional":"Serait-il possible de nous donner votre numéro de téléphone ou votre email pour pouvoir vous aider (au cas où nous ne comprendrions pas bien) ? Veuillez l’écrire ci-dessous :",
+      "contact_optional":"Si possible, pourriez-vous nous fournir votre numéro de téléphone ou votre e-mail pour nous aider (au cas où nous ne comprendrions pas entièrement) ? Veuillez l'écrire ci-dessous :",
       "contact_placeholder": "Par ex. 078... ou email@example.com",
       "submit": "Soumettre",
       "report_alert": "Veuillez soit écrire un rapport, soit enregistrer un message vocal."

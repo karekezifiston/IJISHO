@@ -14,7 +14,7 @@
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
 }
 body,html{
-  min-height:100vh;
+  min-height:100%;
   width:100%;
   overflow-x: hidden;
   scroll-behavior: smooth;
@@ -30,7 +30,6 @@ body,html{
 
 body {
   margin: 0;
-  display: flex;
   min-width: 320px;
   min-height: 100vh;
 }

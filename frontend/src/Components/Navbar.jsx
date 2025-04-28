@@ -36,12 +36,12 @@ const Navbar = () => {
 
       {/* 👇 Mobile Menu (nav-links + language switcher) */}
       <ul className={`nav-links ${menuOpen ? 'mobile-menu' : ''}`}>
-        <li>
+        {/* <li>
           <Link to="/" onClick={() => setMenuOpen(false)}>{t("home")}</Link>
         </li>
         <li>
           <Link to="/about" onClick={() => setMenuOpen(false)}>{t("about")}</Link>
-        </li>
+        </li> */}
         {/* 👇 Add language switcher inside burger dropdown */}
         <li className="mobile-lang">
           <select
