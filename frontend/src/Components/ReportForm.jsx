@@ -1,4 +1,3 @@
-// src/components/ReportForm.js
 import React, { useState, useRef } from 'react';
 import './ReportForm.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -13,10 +12,11 @@ const ReportForm = () => {
     district: '',
     sector: '',
     cell: '',
+    crimeType: '',
     dateTime: '',
     media: null,
     audio: null,
-    contact: '' // Optional
+    contact: ''
   });
 
   const [recording, setRecording] = useState(false);
@@ -54,7 +54,7 @@ const ReportForm = () => {
     setRecording(false);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (!formData.description.trim() && !formData.audio) {
@@ -62,8 +62,55 @@ const ReportForm = () => {
       return;
     }
 
-    console.log('Form Data:', formData);
-    // Send the formData to your server here.
+    const formDataToSend = new FormData();
+
+    // Append text data first
+    formDataToSend.append('description', formData.description);
+    formDataToSend.append('district', formData.district);
+    formDataToSend.append('sector', formData.sector);
+    formDataToSend.append('cell', formData.cell);
+    formDataToSend.append('crimeType', formData.crimeType);
+    formDataToSend.append('dateTime', formData.dateTime);
+    formDataToSend.append('contact', formData.contact);
+
+    // Append media file (if exists)
+    if (formData.media) {
+      formDataToSend.append('media', formData.media);
+    }
+
+    // Append audio (if exists)
+    if (formData.audio) {
+      formDataToSend.append('audio', formData.audio);
+    }
+
+    try {
+      const response = await fetch('http://localhost:5000/api/report', {
+        method: 'POST',
+        body: formDataToSend,
+      });
+
+      if (response.ok) {
+        alert(t("report_success"));
+
+        // Reset form
+        setFormData({
+          description: '',
+          district: '',
+          sector: '',
+          cell: '',
+          crimeType: '',
+          dateTime: '',
+          media: null,
+          audio: null,
+          contact: ''
+        });
+      } else {
+        alert(t("report_error"));
+      }
+    } catch (error) {
+      console.error('Error submitting report:', error);
+      alert(t("report_error"));
+    }
   };
 
   return (
@@ -81,6 +128,18 @@ const ReportForm = () => {
 
       <label>{t("cell")}</label>
       <input name="cell" value={formData.cell} onChange={handleChange} required />
+
+      <div className='crimeType'>
+        <label>{t("crime_type")}</label>
+        <input
+          type="text"
+          name="crimeType"
+          value={formData.crimeType}
+          onChange={handleChange}
+          placeholder={t("crime_type_placeholder")}
+          required
+        />
+      </div>
 
       <label>{t("date")}</label>
       <input type="datetime-local" name="dateTime" value={formData.dateTime} onChange={handleChange} required />
@@ -109,7 +168,6 @@ const ReportForm = () => {
         )}
       </div>
 
-
       {formData.audio && (
         <div>
           <p>{t("audio_taken")}</p>
@@ -119,10 +177,7 @@ const ReportForm = () => {
         </div>
       )}
 
-      {/* Optional Identity */}
-      <label style={{ marginTop: '20px' }}>
-        {t("contact_optional")}
-      </label>
+      <label style={{ marginTop: '20px' }}>{t("contact_optional")}</label>
       <input
         type="text"
         name="contact"

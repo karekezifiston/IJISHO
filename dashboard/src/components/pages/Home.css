@@ -1,0 +1,69 @@
+.home-container {
+  padding: 20px;
+}
+
+.dashboard-heading {
+  font-size: 2em;
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.dashboard-boxes {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.dashboard-box {
+  display: flex;
+  flex-direction: column;
+  align-items:center; /* change from center to stretch */
+  gap: 30px;
+  width: 250px;
+  height: 220px;
+  padding: 30px 20px;
+  background-color: #232323;
+  text-align: left; /* Optional: left-align text inside boxes */
+  border-radius:20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+
+.dashboard-box:hover {
+  transform: scale(1.05);
+}
+.title-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 15px;
+}
+
+.title-row h2 {
+  font-size: 1em;
+  color: #ffffffb7;
+  margin: 0;
+}
+
+.title-row p {
+  color: #ccc;
+  margin: 0;
+}
+
+.dashboard-box h2 {
+  margin: 10px 0;
+  font-size: 1em;
+}
+
+.dashboard-box p {
+  font-size: 1em;
+  color: #555;
+}
+
+.dashboard-box i {
+  margin-bottom: 10px;
+}

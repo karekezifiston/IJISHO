@@ -35,6 +35,10 @@ label {
   padding-right: 10px;
   color: rgba(229, 229, 229, 0.781);
 }
+.crimeType{
+  width:100%;
+  padding-bottom:35px;
+}
 .audio-controls {
   display: flex;
   flex-direction: column;
