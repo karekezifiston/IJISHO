@@ -18,8 +18,11 @@
 }
 
 .latest-reports {
+    display: flex;
+    flex-direction: column;
+    gap:20px;
     width: 100%;
-    max-width: 800px;
+    max-width: 90%;
     background-color: #1a1a1a;
     border-radius: 12px;
     padding: 20px;
