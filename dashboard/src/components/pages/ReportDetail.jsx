@@ -64,17 +64,22 @@ const ReportDetail = () => {
 
       <div className="report-left">
         <div className="media-container">
-          <img 
-            src={`http://localhost:5000/${report.media}`} 
-            alt="crime report" 
-            className="report-image"
-            onClick={handleImageClick}
-          />
+          {/* Conditionally render image or "No image provided" message */}
+          {report.media ? (
+            <img
+              src={`http://localhost:5000/${report.media}`}
+              alt="crime report"
+              className="report-image"
+              onClick={handleImageClick}
+            />
+          ) : (
+            <p>No image or video provided</p>
+          )}
         </div>
       </div>
 
       {/* Full-Screen Modal */}
-      {isFullScreen && (
+      {isFullScreen && report.media && (
         <div className="full-screen-modal" onClick={handleCloseFullScreen}>
           <div className="modal-content" onClick={e => e.stopPropagation()}>
             <button className="close-button" onClick={handleCloseFullScreen}>X</button>
