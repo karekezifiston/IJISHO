@@ -48,7 +48,7 @@
   .crime-type {
     font-size: 36px;
     font-weight: bold;
-    color: #FF6347;
+    color: #b1b0b0;
     margin-top: 20px;
     text-transform: uppercase;
   }
@@ -61,13 +61,13 @@
     color: #888;
     font-size: 14px;
   }
-  
   .location-container h4,
   .report-description h4,
   .contact-info h4 {
     font-size: 18px;
     font-weight: bold;
     margin-bottom: 10px;
+    color: #cfcfcf;
   }
   
   .location-container p,

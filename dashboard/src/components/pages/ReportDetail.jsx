@@ -32,13 +32,13 @@ const ReportDetail = () => {
   return (
     <div className="report-detail-container">
       <div className="report-right">
-        <h1 className="crime-type">{report.crimeType}</h1>
+        <h1 className="crime-type">Crime: {report.crimeType}</h1>
         <div className="report-header">
           <p className="report-date">{new Date(report.dateTime).toLocaleString()}</p>
         </div>
 
         <div className="location-container">
-          <h4>Location:</h4>
+          <h4>Location</h4>
           <p><strong>District:</strong> {report.district}</p>
           <p><strong>Sector:</strong> {report.sector}</p>
           <p><strong>Cell:</strong> {report.cell}</p>
