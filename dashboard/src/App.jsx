@@ -8,6 +8,7 @@ import Logout from './components/pages/Logout';
 import LatestReports from './components/pages/LatestReports'; // Import the new page
 import AcceptedReports from './components/pages/AcceptedReports'; // Import the new page
 import DoneReports from './components/pages/DoneReports'; // Import the new page
+import ReportDetail from './components/pages/ReportDetail'; // ✅ Add this
 import './App.css'; // Add this
 
 const App = () => {
@@ -21,9 +22,10 @@ const App = () => {
             <Route path="/statistics" element={<Statistics />} />
             <Route path="/settings" element={<Settings />} />
             <Route path="/logout" element={<Logout />} />
-            <Route path="/latest" element={<LatestReports />} /> {/* Add route for LatestReports */}
-            <Route path="/accepted" element={<AcceptedReports />} /> {/* Add route for AcceptedReports */}
-            <Route path="/done" element={<DoneReports />} /> {/* Add route for DoneReports */}
+            <Route path="/latest" element={<LatestReports />} />
+            <Route path="/accepted" element={<AcceptedReports />} />
+            <Route path="/done" element={<DoneReports />} />
+            <Route path="/report/:id" element={<ReportDetail />} /> {/* ✅ NEW ROUTE */}
           </Routes>
         </div>
       </div>

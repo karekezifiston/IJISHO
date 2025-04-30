@@ -1,0 +1,174 @@
+.report-detail-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: #1a1a1a;
+    border-radius: 8px;
+    overflow: hidden;
+    max-width: 1200px;
+    margin: 2rem auto;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    color: #aeaeae;
+  }
+  
+  .report-left {
+    width: 40%;
+    padding-right: 20px;
+  }
+  
+  .report-right {
+    width: 55%;
+    padding-left: 20px;
+    border-left: 2px solid #000000;
+  }
+  
+  .media-container {
+    margin-bottom: 20px;
+  }
+  
+  .audio-container {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .report-image {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    border: 2px solid #ddd;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+    cursor: pointer;
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  .crime-type {
+    font-size: 36px;
+    font-weight: bold;
+    color: #FF6347;
+    margin-top: 20px;
+    text-transform: uppercase;
+  }
+  
+  .report-header {
+    margin-bottom: 20px;
+  }
+  
+  .report-date {
+    color: #888;
+    font-size: 14px;
+  }
+  
+  .location-container h4,
+  .report-description h4,
+  .contact-info h4 {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  .location-container p,
+  .report-description p,
+  .contact-info p {
+    font-size: 16px;
+    margin-bottom: 10px;
+  }
+  
+  /* Full-Screen Modal */
+  .full-screen-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.8);  /* Black background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;  /* Bring the modal to the front */
+  }
+  
+  .modal-content {
+    position: relative;
+    width: 80%; /* Image will take 80% of the screen width */
+    height: 80%; /* Image will take 80% of the screen height */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #000000;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  }
+  
+  .full-screen-image {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+  
+  .close-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: #ffffff;
+    color: #000000;
+    border: none;
+    padding:10px 1 2px;
+    border-radius:10%;
+    font-size: 18px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    object-fit:contain;
+  }
+  
+  .close-button:hover {
+    background-color: #4b4b4b;
+  }
+  
+  /* Close the full-screen on click outside the image */
+  .full-screen-modal:hover {
+    cursor: pointer;
+  }
+  
+  .full-screen-modal .modal-content {
+    cursor: initial;
+  }
+  
+  /* Adjustments for mobile view */
+  @media (max-width: 768px) {
+    .report-detail-container {
+      flex-direction: column;
+      padding: 1rem;
+    }
+  
+    .report-left, .report-right {
+      width: 100%;
+      padding: 10px;
+      border-left: none;
+    }
+  
+    .crime-type {
+      font-size: 32px;
+      margin: 10px 0;
+    }
+  
+    .report-image {
+      max-height: 250px;
+      object-fit: cover;
+    }
+  
+    .location-container p,
+    .report-description p,
+    .contact-info p {
+      font-size: 14px;
+    }
+  
+    audio {
+      width: 100%;
+    }
+  }
+  
