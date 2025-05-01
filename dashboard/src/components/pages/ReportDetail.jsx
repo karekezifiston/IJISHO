@@ -29,10 +29,37 @@ const ReportDetail = () => {
     setIsFullScreen(false);
   };
 
+  // Accept report handler
+  const handleAcceptReport = () => {
+    fetch(`http://localhost:5000/api/reports/${id}/accept`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+      .then(res => {
+        if (res.ok) {
+          alert('Report accepted successfully!');
+        } else {
+          throw new Error('Failed to accept the report.');
+        }
+      })
+      .catch(err => {
+        console.error(err);
+        alert('An error occurred while accepting the report.');
+      });
+  };
+
   return (
     <div className="report-detail-container">
       <div className="report-right">
-        <h1 className="crime-type">Crime: {report.crimeType}</h1>
+        <div className="crime-header">
+          <h1 className="crime-type">Crime: {report.crimeType}</h1>
+          {/* Accept Button next to crime type */}
+          <button className="accept-button" onClick={handleAcceptReport}>
+            Accept
+          </button>
+        </div>
         <div className="report-header">
           <p className="report-date">{new Date(report.dateTime).toLocaleString()}</p>
         </div>
@@ -64,7 +91,6 @@ const ReportDetail = () => {
 
       <div className="report-left">
         <div className="media-container">
-          {/* Conditionally render image or "No image provided" message */}
           {report.media ? (
             <img
               src={`http://localhost:5000/${report.media}`}
