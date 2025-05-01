@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import './AcceptedReports.css'; // You can create a similar stylesheet as LatestReports
+import './AcceptedReports.css';
 
 const AcceptedReports = () => {
   const [reports, setReports] = useState([]);
+  const [selectedReports, setSelectedReports] = useState([]);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -25,9 +26,28 @@ const AcceptedReports = () => {
     return `${formattedTime} - ${formattedDate}`;
   };
 
+  const toggleSelection = (id) => {
+    setSelectedReports((prev) =>
+      prev.includes(id) ? prev.filter((reportId) => reportId !== id) : [...prev, id]
+    );
+  };
+
+  const handleDelete = () => {
+    // Example: Delete from frontend only (you can extend this to delete on the backend)
+    const updatedReports = reports.filter((report) => !selectedReports.includes(report._id));
+    setReports(updatedReports);
+    setSelectedReports([]);
+  };
+
   return (
     <div className="all-reports-container">
       <h2 className="reports-heading">Accepted Reports</h2>
+
+      {selectedReports.length > 0 && (
+        <div className="delete-toolbar">
+          <button className="delete-button" onClick={handleDelete}>Delete Selected</button>
+        </div>
+      )}
 
       <div className="accepted-reports">
         {reports.length === 0 ? (
@@ -36,10 +56,14 @@ const AcceptedReports = () => {
           reports.map((report) => (
             <div
               key={report._id}
-              className="report-list-item"
-              onClick={() => handleReportClick(report._id)}
+              className={`report-list-item ${selectedReports.includes(report._id) ? 'selected' : ''}`}
             >
-              <div className="report-main">
+              <input
+                type="checkbox"
+                checked={selectedReports.includes(report._id)}
+                onChange={() => toggleSelection(report._id)}
+              />
+              <div className="report-main" onClick={() => handleReportClick(report._id)}>
                 <div className="report-title">{report.description}</div>
                 <div className="report-meta">
                   <span>{report.district}, {report.sector}, {report.cell}</span>

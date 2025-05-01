@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 
 const DoneReports = () => {
   const [reports, setReports] = useState([]);
+  const [selectedReports, setSelectedReports] = useState([]);
 
   useEffect(() => {
     fetch('http://localhost:5000/api/done-reports')
@@ -19,29 +20,56 @@ const DoneReports = () => {
     return `${formattedTime} - ${formattedDate}`;
   };
 
+  const toggleSelection = (id) => {
+    setSelectedReports((prev) =>
+      prev.includes(id) ? prev.filter((reportId) => reportId !== id) : [...prev, id]
+    );
+  };
+
+  const handleDelete = () => {
+    const updatedReports = reports.filter((report) => !selectedReports.includes(report._id));
+    setReports(updatedReports);
+    setSelectedReports([]);
+  };
+
   return (
     <div className="all-reports-container">
       <h2 className="reports-heading">Done Reports</h2>
+
+      {selectedReports.length > 0 && (
+        <div className="delete-toolbar">
+          <button className="delete-button" onClick={handleDelete}>Delete Selected</button>
+        </div>
+      )}
+
       <div className="done-reports">
         {reports.length === 0 ? (
           <p>No done reports available.</p>
         ) : (
           reports.map((report) => (
-            <Link
-              to={`/report/${report._id}`}
+            <div
               key={report._id}
-              className="report-list-item"
-              style={{ textDecoration: 'none', color: 'inherit' }}
+              className={`report-list-item ${selectedReports.includes(report._id) ? 'selected' : ''}`}
             >
-              <div className="report-main">
-                <div className="report-title">{report.description}</div>
-                <div className="report-meta">
-                  <span>{report.district}, {report.sector}, {report.cell}</span>
-                  <span className="report-type">{report.crimeType}</span>
+              <input
+                type="checkbox"
+                checked={selectedReports.includes(report._id)}
+                onChange={() => toggleSelection(report._id)}
+              />
+              <Link
+                to={`/report/${report._id}`}
+                style={{ textDecoration: 'none', color: 'inherit', flex: 1 }}
+              >
+                <div className="report-main">
+                  <div className="report-title">{report.description}</div>
+                  <div className="report-meta">
+                    <span>{report.district}, {report.sector}, {report.cell}</span>
+                    <span className="report-type">{report.crimeType}</span>
+                  </div>
                 </div>
-              </div>
-              <div className="report-time">{formatDate(report.dateTime)}</div>
-            </Link>
+                <div className="report-time">{formatDate(report.dateTime)}</div>
+              </Link>
+            </div>
           ))
         )}
       </div>
