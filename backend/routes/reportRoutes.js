@@ -2,6 +2,7 @@ const express = require('express');
 const multer = require('multer');
 const Report = require('../models/Report');
 const path = require('path');
+const fs = require('fs');
 const router = express.Router();
 
 // Configure multer storage
@@ -138,6 +139,36 @@ router.get('/done-reports', async (req, res) => {
   } catch (error) {
     console.error('Error fetching completed reports:', error);
     res.status(500).json({ message: 'Error fetching completed reports' });
+  }
+});
+
+// ✅ DELETE: Delete a report by ID (with file cleanup)
+router.delete('/reports/:id', async (req, res) => {
+  try {
+    const report = await Report.findByIdAndDelete(req.params.id);
+
+    if (!report) {
+      return res.status(404).json({ message: 'Report not found' });
+    }
+
+    // Delete associated media file if exists
+    if (report.media) {
+      fs.unlink(report.media, (err) => {
+        if (err) console.error('Error deleting media file:', err);
+      });
+    }
+
+    // Delete associated audio file if exists
+    if (report.audio) {
+      fs.unlink(report.audio, (err) => {
+        if (err) console.error('Error deleting audio file:', err);
+      });
+    }
+
+    res.json({ message: 'Report deleted successfully' });
+  } catch (error) {
+    console.error('Error deleting report:', error);
+    res.status(500).json({ message: 'Failed to delete report' });
   }
 });
 

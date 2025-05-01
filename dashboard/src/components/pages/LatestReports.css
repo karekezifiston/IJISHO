@@ -6,6 +6,49 @@
     min-height: 100vh;
     color: #eaeaea;
 }
+/* 🔁 Existing styles remain untouched */
+
+/* ✅ Checkbox and selection styling */
+.report-list-item input[type="checkbox"] {
+    margin-right: 10px;
+    transform: scale(1.2);
+    accent-color: #ff4d4d; /* Red checkbox */
+    cursor: pointer;
+}
+
+/* ✅ Highlight selected items */
+.report-list-item.selected {
+    background-color: #333;
+    border: 1px solid #ff4d4d;
+}
+
+/* ✅ Delete toolbar */
+.delete-toolbar {
+    display: flex;
+    justify-content: flex-end;
+    background-color: #2a2a2a;
+    padding: 12px 20px;
+    margin-bottom: 15px;
+    border-radius: 10px;
+    box-shadow: 0 0 8px rgba(255, 77, 77, 0.2);
+}
+
+/* ✅ Delete button styling */
+.delete-button {
+    background-color: #ff4d4d;
+    color: #fff;
+    border: none;
+    padding: 8px 16px;
+    font-size: 14px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.delete-button:hover {
+    background-color: #e63c3c;
+}
+
 
 .reports-heading {
     font-size: 28px;
