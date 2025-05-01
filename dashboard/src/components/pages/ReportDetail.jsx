@@ -25,7 +25,7 @@ const ReportDetail = () => {
       .then(res => {
         if (res.ok) {
           alert('Report accepted successfully!');
-          setReport(prev => ({ ...prev, isAccepted: true }));
+          setReport(prev => ({ ...prev, isAccepted: true, completed: true }));
         } else {
           throw new Error('Failed to accept the report.');
         }
@@ -43,11 +43,16 @@ const ReportDetail = () => {
       <div className="report-right">
         <div className="crime-header">
           <h1 className="crime-type">Crime: {report.crimeType}</h1>
-          <button className="accept-button" onClick={handleAcceptReport}>Accept</button>
+
+          {report.completed ? (
+            <button className="done-button" disabled>✅ Done</button>
+          ) : (
+            <button className="accept-button" onClick={handleAcceptReport}>Accept</button>
+          )}
         </div>
 
         <div className="report-header">
-          <p className="report-date">{new Date(report.dateTime).toLocaleString()}</p>
+          <p className="report-date">{new Date(report.dateTime.$date).toLocaleString()}</p>
         </div>
 
         <div className="location-container">
