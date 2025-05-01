@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import './AcceptedReportDetail.css';  // Ensure this is the correct file path
+import './AcceptedReportDetail.css';
 
 const AcceptedReportDetail = () => {
   const { id } = useParams();
@@ -13,28 +13,6 @@ const AcceptedReportDetail = () => {
       .then(data => setReport(data))
       .catch(err => console.error('Failed to fetch report:', err));
   }, [id]);
-
-  const handleImageClick = () => setIsFullScreen(true);
-  const handleCloseFullScreen = () => setIsFullScreen(false);
-
-  const handleAcceptReport = () => {
-    fetch(`http://localhost:5000/api/reports/${id}/accept`, {
-      method: 'PATCH',
-      headers: { 'Content-Type': 'application/json' },
-    })
-      .then(res => {
-        if (res.ok) {
-          alert('Report accepted successfully!');
-          setReport(prev => ({ ...prev, isAccepted: true }));
-        } else {
-          throw new Error('Failed to accept the report.');
-        }
-      })
-      .catch(err => {
-        console.error(err);
-        alert('An error occurred while accepting the report.');
-      });
-  };
 
   const handleDoneReport = () => {
     fetch(`http://localhost:5000/api/reports/${id}/done`, {
@@ -55,6 +33,9 @@ const AcceptedReportDetail = () => {
       });
   };
 
+  const handleImageClick = () => setIsFullScreen(true);
+  const handleCloseFullScreen = () => setIsFullScreen(false);
+
   if (!report) return <div>Loading...</div>;
 
   return (
@@ -62,7 +43,6 @@ const AcceptedReportDetail = () => {
       <div className="report-right">
         <div className="crime-header">
           <h1 className="crime-type">Crime: {report.crimeType}</h1>
-          <button className="accept-button" onClick={handleAcceptReport}>Accept</button>
           <button className="done-button" onClick={handleDoneReport} disabled={report.isDone}>
             {report.isDone ? 'Done' : 'Mark as Done'}
           </button>
