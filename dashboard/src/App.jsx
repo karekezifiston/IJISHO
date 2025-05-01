@@ -5,11 +5,12 @@ import Home from './components/pages/Home';
 import Statistics from './components/pages/Statistics';
 import Settings from './components/pages/Settings';
 import Logout from './components/pages/Logout';
-import LatestReports from './components/pages/LatestReports'; // Import the new page
-import AcceptedReports from './components/pages/AcceptedReports'; // Import the new page
-import DoneReports from './components/pages/DoneReports'; // Import the new page
-import ReportDetail from './components/pages/ReportDetail'; // ✅ Add this
-import './App.css'; // Add this
+import LatestReports from './components/pages/LatestReports';
+import DoneReports from './components/pages/DoneReports';
+import ReportDetail from './components/pages/ReportDetail';
+import AcceptedReportDetail from './components/pages/AcceptedReportDetail';
+import AcceptedReports from './components/pages/AcceptedReports'; // ✅ Accepted Reports List
+import './App.css';
 
 const App = () => {
   return (
@@ -23,9 +24,11 @@ const App = () => {
             <Route path="/settings" element={<Settings />} />
             <Route path="/logout" element={<Logout />} />
             <Route path="/latest" element={<LatestReports />} />
-            <Route path="/accepted" element={<AcceptedReports />} />
             <Route path="/done" element={<DoneReports />} />
-            <Route path="/report/:id" element={<ReportDetail />} /> {/* ✅ NEW ROUTE */}
+            <Route path="/report/:id" element={<ReportDetail />} />
+            <Route path="/accepted/:id" element={<AcceptedReportDetail />} />
+            <Route path="/accepted-reports" element={<AcceptedReports />} />
+            <Route path="/accepted" element={<AcceptedReports />} /> {/* Optionally, this route can be added */}
           </Routes>
         </div>
       </div>

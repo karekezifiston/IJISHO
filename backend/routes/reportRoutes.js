@@ -4,40 +4,36 @@ const Report = require('../models/Report');
 const path = require('path');
 const router = express.Router();
 
-// Configure multer storage for media and audio
+// Configure multer storage
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, 'uploads/'); // Specify the destination folder for uploads
+    cb(null, 'uploads/');
   },
   filename: (req, file, cb) => {
-    cb(null, Date.now() + '-' + file.originalname);  // Ensure unique filenames
+    cb(null, Date.now() + '-' + file.originalname);
   }
 });
 
 const upload = multer({ storage });
 
-// Serve static files for media and audio (make sure you have this in your Express app)
+// Serve uploaded media/audio
 router.use('/uploads', express.static(path.join(__dirname, '../uploads')));
 
-// POST route for submitting reports
+// ✅ POST: Submit a new report
 router.post('/report', upload.fields([
-  { name: 'media', maxCount: 1 },  // Optional media field
-  { name: 'audio', maxCount: 1 },  // Optional audio field
+  { name: 'media', maxCount: 1 },
+  { name: 'audio', maxCount: 1 },
 ]), async (req, res) => {
   try {
-    // Destructure the incoming data from the request body
     const { description, district, sector, cell, crimeType, dateTime, contact } = req.body;
 
-    // Check for required fields
     if (!description || !district || !sector || !cell || !crimeType || !dateTime || !contact) {
       return res.status(400).json({ error: 'All fields are required except media and audio.' });
     }
 
-    // Get the file paths for media and audio, if uploaded
-    const media = req.files['media'] ? req.files['media'][0].path : null;  // File path for media
-    const audio = req.files['audio'] ? req.files['audio'][0].path : null;  // File path for audio
+    const media = req.files['media'] ? req.files['media'][0].path : null;
+    const audio = req.files['audio'] ? req.files['audio'][0].path : null;
 
-    // Create a new report document
     const report = new Report({
       description,
       district,
@@ -46,13 +42,11 @@ router.post('/report', upload.fields([
       crimeType,
       dateTime,
       contact,
-      media,  // Save the file path for media
-      audio   // Save the file path for audio
+      media,
+      audio,
     });
 
-    // Save the report to the database
     await report.save();
-
     res.status(201).json({ message: 'Report submitted successfully', report });
   } catch (error) {
     console.error('Error saving report:', error);
@@ -60,10 +54,10 @@ router.post('/report', upload.fields([
   }
 });
 
-// ✅ GET all reports
+// ✅ GET: All reports
 router.get('/reports', async (req, res) => {
   try {
-    const reports = await Report.find().sort({ dateTime: -1 }); // Sort by dateTime descending
+    const reports = await Report.find().sort({ dateTime: -1 });
     res.json(reports);
   } catch (error) {
     console.error('Error fetching reports:', error);
@@ -71,7 +65,7 @@ router.get('/reports', async (req, res) => {
   }
 });
 
-// ✅ GET one report by ID
+// ✅ GET: Single report by ID
 router.get('/reports/:id', async (req, res) => {
   try {
     const report = await Report.findById(req.params.id);
@@ -82,6 +76,68 @@ router.get('/reports/:id', async (req, res) => {
   } catch (error) {
     console.error('Error fetching report:', error);
     res.status(500).json({ message: 'Error fetching the report' });
+  }
+});
+
+// ✅ PATCH: Mark a report as done
+router.patch('/reports/:id/done', async (req, res) => {
+  try {
+    const report = await Report.findByIdAndUpdate(
+      req.params.id,
+      { isDone: true },
+      { new: true }
+    );
+
+    if (!report) {
+      return res.status(404).json({ message: 'Report not found' });
+    }
+
+    res.json({ message: 'Report marked as done', report });
+  } catch (error) {
+    console.error('Error updating report:', error);
+    res.status(500).json({ message: 'Failed to mark report as done' });
+  }
+});
+
+// ✅ PATCH: Mark a report as accepted
+router.patch('/reports/:id/accept', async (req, res) => {
+  try {
+    const report = await Report.findByIdAndUpdate(
+      req.params.id,
+      { isAccepted: true },
+      { new: true }
+    );
+
+    if (!report) {
+      return res.status(404).json({ message: 'Report not found' });
+    }
+
+    res.json({ message: 'Report accepted successfully', report });
+  } catch (error) {
+    console.error('Error accepting report:', error);
+    res.status(500).json({ message: 'Error accepting report' });
+  }
+});
+
+// ✅ GET: Only accepted reports
+router.get('/accepted-reports', async (req, res) => {
+  try {
+    const acceptedReports = await Report.find({ isAccepted: true }).sort({ dateTime: -1 });
+    res.json(acceptedReports);
+  } catch (error) {
+    console.error('Error fetching accepted reports:', error);
+    res.status(500).json({ message: 'Error fetching accepted reports' });
+  }
+});
+
+// ✅ GET: Only done reports
+router.get('/done-reports', async (req, res) => {
+  try {
+    const doneReports = await Report.find({ isDone: true }).sort({ dateTime: -1 });
+    res.json(doneReports);
+  } catch (error) {
+    console.error('Error fetching done reports:', error);
+    res.status(500).json({ message: 'Error fetching done reports' });
   }
 });
 

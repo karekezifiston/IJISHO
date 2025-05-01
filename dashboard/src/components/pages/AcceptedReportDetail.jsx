@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import './ReportDetail.css';
+import './AcceptedReportDetail.css';  // Ensure this is the correct file path
 
-const ReportDetail = () => {
+const AcceptedReportDetail = () => {
   const { id } = useParams();
   const [report, setReport] = useState(null);
   const [isFullScreen, setIsFullScreen] = useState(false);
@@ -36,6 +36,25 @@ const ReportDetail = () => {
       });
   };
 
+  const handleDoneReport = () => {
+    fetch(`http://localhost:5000/api/reports/${id}/done`, {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+    })
+      .then(res => {
+        if (res.ok) {
+          alert('Report marked as done!');
+          setReport(prev => ({ ...prev, isDone: true }));
+        } else {
+          throw new Error('Failed to mark the report as done.');
+        }
+      })
+      .catch(err => {
+        console.error(err);
+        alert('An error occurred while marking the report as done.');
+      });
+  };
+
   if (!report) return <div>Loading...</div>;
 
   return (
@@ -44,6 +63,9 @@ const ReportDetail = () => {
         <div className="crime-header">
           <h1 className="crime-type">Crime: {report.crimeType}</h1>
           <button className="accept-button" onClick={handleAcceptReport}>Accept</button>
+          <button className="done-button" onClick={handleDoneReport} disabled={report.isDone}>
+            {report.isDone ? 'Done' : 'Mark as Done'}
+          </button>
         </div>
 
         <div className="report-header">
@@ -106,4 +128,4 @@ const ReportDetail = () => {
   );
 };
 
-export default ReportDetail;
+export default AcceptedReportDetail;
