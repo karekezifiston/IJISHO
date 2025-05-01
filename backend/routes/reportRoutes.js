@@ -80,23 +80,27 @@ router.get('/reports/:id', async (req, res) => {
   }
 });
 
-// ✅ PATCH: Mark a report as completed
+// ✅ PATCH: Mark a report as completed and reset it (toggle back to default state)
 router.patch('/reports/:id/done', async (req, res) => {
   try {
-    const report = await Report.findByIdAndUpdate(
-      req.params.id,
-      { completed: true },
-      { new: true }
-    );
+    const report = await Report.findById(req.params.id);
 
     if (!report) {
       return res.status(404).json({ message: 'Report not found' });
     }
 
-    res.json({ message: 'Report marked as completed', report });
+    // Toggle the completed status
+    if (report.completed) {
+      report.completed = false; // Reset back to default
+    } else {
+      report.completed = true; // Mark as completed
+    }
+
+    await report.save();
+    res.json({ message: `Report ${report.completed ? 'marked as completed' : 'reset to default'}`, report });
   } catch (error) {
     console.error('Error updating report:', error);
-    res.status(500).json({ message: 'Failed to mark report as completed' });
+    res.status(500).json({ message: 'Failed to update report status' });
   }
 });
 
@@ -117,6 +121,26 @@ router.patch('/reports/:id/accept', async (req, res) => {
   } catch (error) {
     console.error('Error accepting report:', error);
     res.status(500).json({ message: 'Error accepting report' });
+  }
+});
+
+// ✅ PATCH: Mark a report as unaccepted (cancel acceptance)
+router.patch('/reports/:id/unaccept', async (req, res) => {
+  try {
+    const report = await Report.findByIdAndUpdate(
+      req.params.id,
+      { isAccepted: false },
+      { new: true }
+    );
+
+    if (!report) {
+      return res.status(404).json({ message: 'Report not found' });
+    }
+
+    res.json({ message: 'Report acceptance canceled successfully', report });
+  } catch (error) {
+    console.error('Error canceling report acceptance:', error);
+    res.status(500).json({ message: 'Error canceling report acceptance' });
   }
 });
 

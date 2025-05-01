@@ -32,6 +32,25 @@ const DoneReports = () => {
     setSelectedReports([]);
   };
 
+  const handleMarkUncomplete = () => {
+    selectedReports.forEach((reportId) => {
+      fetch(`http://localhost:5000/api/reports/${reportId}/done`, {
+        method: 'PATCH',
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          // Update the reports state after marking uncomplete
+          setReports((prevReports) =>
+            prevReports.map((report) =>
+              report._id === reportId ? { ...report, completed: false } : report
+            )
+          );
+        })
+        .catch((err) => console.error('Failed to mark report as uncomplete:', err));
+    });
+    setSelectedReports([]);
+  };
+
   return (
     <div className="all-reports-container">
       <h2 className="reports-heading">Done Reports</h2>
@@ -39,6 +58,7 @@ const DoneReports = () => {
       {selectedReports.length > 0 && (
         <div className="delete-toolbar">
           <button className="delete-button" onClick={handleDelete}>Delete Selected</button>
+          <button className="uncomplete-button" onClick={handleMarkUncomplete}>Mark as Uncomplete</button>
         </div>
       )}
 

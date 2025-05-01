@@ -32,11 +32,36 @@ const AcceptedReports = () => {
     );
   };
 
-  const handleDelete = () => {
+  const handleDelete = async () => {
     // Example: Delete from frontend only (you can extend this to delete on the backend)
     const updatedReports = reports.filter((report) => !selectedReports.includes(report._id));
     setReports(updatedReports);
     setSelectedReports([]);
+    
+    // Make API call to delete on the backend (optional)
+    // await fetch(`http://localhost:5000/api/reports/${reportId}`, { method: 'DELETE' });
+  };
+
+  const handleDecline = async () => {
+    // Unaccept reports selected
+    try {
+      for (const reportId of selectedReports) {
+        await fetch(`http://localhost:5000/api/reports/${reportId}/unaccept`, {
+          method: 'PATCH',
+        });
+      }
+      
+      // Update the local state to reflect the changes
+      const updatedReports = reports.map((report) => 
+        selectedReports.includes(report._id)
+          ? { ...report, isAccepted: false }
+          : report
+      );
+      setReports(updatedReports);
+      setSelectedReports([]);
+    } catch (error) {
+      console.error('Failed to decline the report:', error);
+    }
   };
 
   return (
@@ -45,6 +70,7 @@ const AcceptedReports = () => {
 
       {selectedReports.length > 0 && (
         <div className="delete-toolbar">
+          <button className="decline-button" onClick={handleDecline}>Remove</button>
           <button className="delete-button" onClick={handleDelete}>Delete Selected</button>
         </div>
       )}

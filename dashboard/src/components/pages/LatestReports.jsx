@@ -55,14 +55,34 @@ const LatestReports = () => {
     fetchReports();
   };
 
+  const handleAccept = async () => {
+    if (!window.confirm('Are you sure you want to accept selected reports?')) return;
+
+    for (const reportId of selectedReports) {
+      try {
+        await fetch(`http://localhost:5000/api/reports/${reportId}/accept`, {
+          method: 'PATCH',
+        });
+      } catch (err) {
+        console.error(`Error accepting report ${reportId}:`, err);
+      }
+    }
+
+    setSelectedReports([]);
+    fetchReports();
+  };
+
   return (
     <div className="all-reports-container">
       <h2 className="reports-heading">Latest Reports</h2>
 
       {selectedReports.length > 0 && (
-        <div className="delete-toolbar">
+        <div className="action-toolbar">
           <button className="delete-button" onClick={handleDelete}>
             Delete Selected ({selectedReports.length})
+          </button>
+          <button className="accept-button" onClick={handleAccept}>
+            Accept Selected ({selectedReports.length})
           </button>
         </div>
       )}
