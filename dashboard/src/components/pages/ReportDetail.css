@@ -57,6 +57,9 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  text-wrap: nowrap;
+  width: 100%;
+  gap: 30vw;
 }
 
 .report-header {
@@ -146,12 +149,17 @@
 
 /* Accept Button styling */
 .accept-button {
-  padding: 8px 16px;
+  padding: 10px 16px;
   background-color: #4caf50;
   color: white;
   border: none;
   border-radius: 5px;
   cursor: pointer;
+  font-weight: 600;
+  font-size: 13px !important;
+  text-wrap: nowrap;
+  display: inline-block; /* Ensure it fits properly in the container */
+  transition: background-color 0.3s;
 }
 
 .accept-button:hover {
@@ -189,5 +197,19 @@
 
   audio {
     width: 100%;
+  }
+
+  /* Accept Button styling adjustments for mobile */
+  .crime-header {
+    flex-direction: column; /* Stack elements vertically on smaller screens */
+    gap: 10px; /* Adjust gap to make space between elements */
+    align-items: center; /* Center align the elements */
+  }
+
+  .accept-button {
+    width: 100%; /* Make the button take the full width on small screens */
+    padding: 12px 0; /* Increase padding for better click area */
+    font-size: 16px; /* Slightly larger font size for readability */
+    text-align: center; /* Center the button text */
   }
 }
