@@ -1,53 +1,50 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 
 const DoneReports = () => {
-  const [doneReports, setDoneReports] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [reports, setReports] = useState([]);
 
   useEffect(() => {
-    // Fetch done reports from the backend
-    fetch('http://localhost:5000/api/reports/done')  // Make sure this endpoint matches your backend
-      .then((response) => response.json())
-      .then((data) => {
-        // Filter the reports where isDone is true
-        const doneReports = data.filter(report => report.isDone);
-        // Make sure the dateTime is converted to a proper Date object
-        const updatedReports = doneReports.map(report => ({
-          ...report,
-          dateTime: new Date(report.dateTime.$date), // Convert MongoDB date to JavaScript Date object
-        }));
-        setDoneReports(updatedReports);
-        setLoading(false);
-      })
-      .catch((error) => {
-        console.error('Error fetching done reports:', error);
-        setLoading(false);
-      });
+    fetch('http://localhost:5000/api/done-reports')
+      .then((res) => res.json())
+      .then((data) => setReports(data))
+      .catch((err) => console.error('Failed to fetch done reports:', err));
   }, []);
 
-  if (loading) {
-    return <div>Loading...</div>;
-  }
+  const formatDate = (date) => {
+    const options = { year: 'numeric', month: 'short', day: 'numeric' };
+    const timeOptions = { hour: '2-digit', minute: '2-digit', hour12: true };
+    const formattedDate = new Date(date).toLocaleDateString(undefined, options);
+    const formattedTime = new Date(date).toLocaleTimeString(undefined, timeOptions);
+    return `${formattedTime} - ${formattedDate}`;
+  };
 
   return (
-    <div>
-      <h1>Done Reports</h1>
-      {doneReports.length === 0 ? (
-        <p>No done reports available</p>
-      ) : (
-        <div>
-          {doneReports.map((report) => (
-            <div key={report._id} className="report-card">
-              <h3>{report.crimeType}</h3>
-              <p>{report.district} - {report.sector} - {report.cell}</p>
-              <p>{new Date(report.dateTime).toLocaleString()}</p>
-              <p>{report.description}</p>
-              {/* Display other relevant fields as needed */}
-              <button onClick={() => window.location.href = `/report/${report._id}`}>View Details</button>
-            </div>
-          ))}
-        </div>
-      )}
+    <div className="all-reports-container">
+      <h2 className="reports-heading">Done Reports</h2>
+      <div className="done-reports">
+        {reports.length === 0 ? (
+          <p>No done reports available.</p>
+        ) : (
+          reports.map((report) => (
+            <Link
+              to={`/report/${report._id}`}
+              key={report._id}
+              className="report-list-item"
+              style={{ textDecoration: 'none', color: 'inherit' }}
+            >
+              <div className="report-main">
+                <div className="report-title">{report.description}</div>
+                <div className="report-meta">
+                  <span>{report.district}, {report.sector}, {report.cell}</span>
+                  <span className="report-type">{report.crimeType}</span>
+                </div>
+              </div>
+              <div className="report-time">{formatDate(report.dateTime)}</div>
+            </Link>
+          ))
+        )}
+      </div>
     </div>
   );
 };

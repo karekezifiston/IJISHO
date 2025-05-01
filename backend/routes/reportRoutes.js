@@ -79,12 +79,12 @@ router.get('/reports/:id', async (req, res) => {
   }
 });
 
-// ✅ PATCH: Mark a report as done
+// ✅ PATCH: Mark a report as completed
 router.patch('/reports/:id/done', async (req, res) => {
   try {
     const report = await Report.findByIdAndUpdate(
       req.params.id,
-      { isDone: true },
+      { completed: true },
       { new: true }
     );
 
@@ -92,10 +92,10 @@ router.patch('/reports/:id/done', async (req, res) => {
       return res.status(404).json({ message: 'Report not found' });
     }
 
-    res.json({ message: 'Report marked as done', report });
+    res.json({ message: 'Report marked as completed', report });
   } catch (error) {
     console.error('Error updating report:', error);
-    res.status(500).json({ message: 'Failed to mark report as done' });
+    res.status(500).json({ message: 'Failed to mark report as completed' });
   }
 });
 
@@ -130,14 +130,14 @@ router.get('/accepted-reports', async (req, res) => {
   }
 });
 
-// ✅ GET: Only done reports
+// ✅ GET: Only completed reports
 router.get('/done-reports', async (req, res) => {
   try {
-    const doneReports = await Report.find({ isDone: true }).sort({ dateTime: -1 });
+    const doneReports = await Report.find({ completed: true }).sort({ dateTime: -1 });
     res.json(doneReports);
   } catch (error) {
-    console.error('Error fetching done reports:', error);
-    res.status(500).json({ message: 'Error fetching done reports' });
+    console.error('Error fetching completed reports:', error);
+    res.status(500).json({ message: 'Error fetching completed reports' });
   }
 });
 

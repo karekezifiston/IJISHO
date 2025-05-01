@@ -10,7 +10,7 @@ const reportSchema = new mongoose.Schema({
   contact: String,
   media: String, // path to media
   audio: String, // path to audio
-  isDone: { type: Boolean, default: false },
+  completed: { type: Boolean, default: false },
   isAccepted: { type: Boolean, default: false }, // Make sure this exists
 });
 
