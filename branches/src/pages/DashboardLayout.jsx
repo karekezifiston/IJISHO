@@ -1,6 +1,7 @@
 // src/pages/DashboardLayout.jsx
 import React from 'react';
 import { Outlet, useNavigate, useLocation } from 'react-router-dom';
+import { FaFileAlt, FaCheckCircle, FaRegCheckCircle } from 'react-icons/fa';
 import './DashboardLayout.css';
 
 const DashboardLayout = () => {
@@ -12,19 +13,36 @@ const DashboardLayout = () => {
   const isDoneReports = location.pathname === '/dashboard/done';
 
   return (
-    <div style={{ flex: 1, padding: '1rem' }}>
-      <h2>Dashboard</h2>
+    <div className="layout-content">
+      <h1 className="dashboard-heading">Dashboard</h1>
 
       {!isLatestReports && !isAcceptedReports && !isDoneReports && (
-        <div style={{ display: 'flex', gap: '1rem', marginBottom: '1rem' }}>
-          <div className="nav-box" onClick={() => navigate('/dashboard/latest')}>
-            Latest Reports
+        <div className="dashboard-boxes">
+          <div className="dashboard-box" onClick={() => navigate('/dashboard/latest')}>
+            <div className="title-row">
+              <h2>Latest Reports</h2>
+              <p>More</p>
+            </div>
+            <FaFileAlt size={50} />
+            <p>View newly submitted reports</p>
           </div>
-          <div className="nav-box" onClick={() => navigate('/dashboard/accepted')}>
-            Accepted Reports
+
+          <div className="dashboard-box" onClick={() => navigate('/dashboard/accepted')}>
+            <div className="title-row">
+              <h2>Accepted Reports</h2>
+              <p>/100</p>
+            </div>
+            <FaCheckCircle size={50} />
+            <p>Reports currently being worked on</p>
           </div>
-          <div className="nav-box" onClick={() => navigate('/dashboard/done')}>
-            Done Reports
+
+          <div className="dashboard-box" onClick={() => navigate('/dashboard/done')}>
+            <div className="title-row">
+              <h2>Done Reports</h2>
+              <p>....</p>
+            </div>
+            <FaRegCheckCircle size={50} color="#4CAF50" />
+            <p>Reports that have been solved</p>
           </div>
         </div>
       )}
