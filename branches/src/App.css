@@ -4,6 +4,10 @@
   padding: 2rem;
   text-align: center;
 }
+.app-container {
+  display: flex;
+  min-height: 100vh;
+}
 
 .logo {
   height: 6em;

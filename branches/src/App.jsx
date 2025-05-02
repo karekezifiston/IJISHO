@@ -11,6 +11,7 @@ import DoneReports from './pages/DoneReports';
 const App = () => {
   return (
     <DistrictProvider>
+      <div className="app-container">
       <Router>
         <Routes>
           <Route path="/" element={<DistrictSelection />} />
@@ -23,6 +24,7 @@ const App = () => {
           </Route>
         </Routes>
       </Router>
+      </div>
     </DistrictProvider>
   );
 };

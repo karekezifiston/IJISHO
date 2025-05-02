@@ -22,8 +22,8 @@ const DistrictSelection = () => {
   };
 
   return (
-    <div>
-      <h2>Select a District</h2>
+    <div className='district-selection'>
+      <h1>BRANCHES REPORTS</h1>
       <form onSubmit={handleSubmit}>
         <select value={selectedDistrict} onChange={handleDistrictChange}>
           <option value="">Select District</option>
@@ -31,7 +31,7 @@ const DistrictSelection = () => {
           <option value="Gasabo">Gasabo</option>
           <option value="Nyarugenge">Nyarugenge</option>
         </select>
-        <button type="submit">Submit</button>
+        <button type="submit">Enter</button>
       </form>
     </div>
   );

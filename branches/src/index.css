@@ -15,28 +15,58 @@
 
 
 body {
-  margin: 0;
-  display: flex;
-  place-items: center;
   min-width: 320px;
   min-height: 100vh;
 }
 
-
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
+.district-selection {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 50vh;
+  margin-top: 5rem;
+  border:0.1px solid #cccccc3f; /* optional: add color for better visuals */
+  border-radius: 8px;      /* optional: smoother corners */
+  padding: 1rem;           /* optional: adds internal spacing */
+  box-sizing: border-box; /* ensures padding doesn't overflow */
+  width: 50%;
+  margin: 5rem auto 0 auto; /* top: 5rem, left/right: auto */
 }
+.district-selection h1{
+  font-size:2.5rem;
+  color: #979797;
 
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+}
+.district-selection form{
+  display: flex;
+  flex-direction:column;
+  justify-content: center;
+  align-items: center;
+  gap:3rem;
+}
+.district-selection select{
+  padding:0.5rem;
+  border-radius:0.5rem;
+  border:1px soldid #ccc;
+  background-color:#ffffff;
+  color:#000;
+  font-size:1rem;
+  font-weight:500;
+  width:100%;
+  max-width:300px;
+}
+.district-selection button{
+  padding:0.7rem 2rem;
+  border-radius:0.5rem;
+  border:none;
+  background:black;
+  color:white;
+  font-size:1rem;
+  font-weight:500;
+  cursor:pointer;
+}
+.district-selection button:hover{
+  background: #0d0d0d98;
 }
 
