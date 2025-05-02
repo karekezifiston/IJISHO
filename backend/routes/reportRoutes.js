@@ -20,6 +20,26 @@ const upload = multer({ storage });
 // Serve uploaded media/audio
 router.use('/uploads', express.static(path.join(__dirname, '../uploads')));
 
+// ✅ NEW: Statistics summary (total, accepted, done)
+router.get('/reports/statistics', async (req, res) => {
+  try {
+    const [totalCount, acceptedCount, doneCount] = await Promise.all([
+      Report.countDocuments(),
+      Report.countDocuments({ isAccepted: true }),
+      Report.countDocuments({ completed: true }),
+    ]);
+
+    res.json({
+      totalReports: totalCount,
+      acceptedReports: acceptedCount,
+      doneReports: doneCount,
+    });
+  } catch (error) {
+    console.error('Error fetching statistics:', error);
+    res.status(500).json({ message: 'Failed to fetch report statistics' });
+  }
+});
+
 // ✅ POST: Submit a new report
 router.post('/report', upload.fields([
   { name: 'media', maxCount: 1 },
@@ -80,7 +100,7 @@ router.get('/reports/:id', async (req, res) => {
   }
 });
 
-// ✅ PATCH: Mark a report as completed and reset it (toggle back to default state)
+// ✅ PATCH: Mark a report as completed / reset
 router.patch('/reports/:id/done', async (req, res) => {
   try {
     const report = await Report.findById(req.params.id);
@@ -89,13 +109,7 @@ router.patch('/reports/:id/done', async (req, res) => {
       return res.status(404).json({ message: 'Report not found' });
     }
 
-    // Toggle the completed status
-    if (report.completed) {
-      report.completed = false; // Reset back to default
-    } else {
-      report.completed = true; // Mark as completed
-    }
-
+    report.completed = !report.completed;
     await report.save();
     res.json({ message: `Report ${report.completed ? 'marked as completed' : 'reset to default'}`, report });
   } catch (error) {
@@ -104,7 +118,7 @@ router.patch('/reports/:id/done', async (req, res) => {
   }
 });
 
-// ✅ PATCH: Mark a report as accepted
+// ✅ PATCH: Accept a report
 router.patch('/reports/:id/accept', async (req, res) => {
   try {
     const report = await Report.findByIdAndUpdate(
@@ -124,7 +138,7 @@ router.patch('/reports/:id/accept', async (req, res) => {
   }
 });
 
-// ✅ PATCH: Mark a report as unaccepted (cancel acceptance)
+// ✅ PATCH: Unaccept a report
 router.patch('/reports/:id/unaccept', async (req, res) => {
   try {
     const report = await Report.findByIdAndUpdate(
@@ -175,14 +189,14 @@ router.delete('/reports/:id', async (req, res) => {
       return res.status(404).json({ message: 'Report not found' });
     }
 
-    // Delete associated media file if exists
+    // Delete associated media file
     if (report.media) {
       fs.unlink(report.media, (err) => {
         if (err) console.error('Error deleting media file:', err);
       });
     }
 
-    // Delete associated audio file if exists
+    // Delete associated audio file
     if (report.audio) {
       fs.unlink(report.audio, (err) => {
         if (err) console.error('Error deleting audio file:', err);
