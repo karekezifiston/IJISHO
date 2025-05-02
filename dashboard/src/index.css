@@ -12,21 +12,16 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-.home-container {
-  padding: 20px;
-}
-
 .dashboard-heading {
   font-size: 2rem;
   text-align: center;
   margin-bottom: 30px;
 }
 
-.charts-container {
+.chart-boxes {
   display: flex;
   justify-content: space-around;
   gap: 20px;
-  flex-wrap: wrap;
 }
 
 .chart-box {
@@ -34,13 +29,37 @@
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  width: 300px;
+  width: 250px;
   text-align: center;
+}
+
+.title-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+}
+
+.icon {
+  margin-top: 15px;
+  margin-bottom: 10px;
+}
+
+.percentage {
+  font-weight: bold;
+  color: #4caf50;
+  margin-top: 10px;
 }
 
 .chart-box h2 {
   font-size: 1.5rem;
-  margin-bottom: 15px;
+  color: #333;
+}
+
+.chart-box p {
+  font-size: 1rem;
+  color: #666;
 }
 
 

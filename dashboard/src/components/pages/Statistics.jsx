@@ -1,9 +1,31 @@
 import React, { useEffect, useState } from 'react';
-import { Bar, Line, Pie } from 'react-chartjs-2';
-import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend, ArcElement, PointElement, LineElement } from 'chart.js';
+import { FaListAlt, FaCheckDouble, FaTasks } from 'react-icons/fa';
+import { Bar } from 'react-chartjs-2';
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  Title,
+  Tooltip,
+  Legend
+} from 'chart.js';
+import './Home.css';
 
-// Registering the necessary components for Chart.js
-ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend, ArcElement, PointElement, LineElement);
+// Register ChartJS components
+ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
+
+const ChartBox = ({ label, value, icon, description, percentage }) => (
+  <div className="chart-box">
+    <div className="title-row">
+      <h2>{label}</h2>
+      <p>{value}</p>
+    </div>
+    <div className="icon">{icon}</div>
+    <p>{description}</p>
+    <p className="percentage">{percentage}</p>
+  </div>
+);
 
 const Statistics = () => {
   const [stats, setStats] = useState({
@@ -12,7 +34,6 @@ const Statistics = () => {
     done: 0,
   });
 
-  // Fetch the statistics from the API
   const fetchStatistics = async () => {
     try {
       const response = await fetch('http://localhost:5000/api/reports/statistics');
@@ -27,92 +48,78 @@ const Statistics = () => {
     }
   };
 
-  // Fetch statistics on mount
   useEffect(() => {
     fetchStatistics();
   }, []);
 
-  // Destructuring stats for easier reference
-  const { total, accepted, done } = stats;
+  const getPercentage = (value) => {
+    return stats.total > 0 ? `${((value / stats.total) * 100).toFixed(1)}%` : '0%';
+  };
 
-  // Calculate percentages
-  const totalPercentage = total > 0 ? 100 : 0; // All reports are always 100%
-  const acceptedPercentage = total > 0 ? ((accepted / total) * 100).toFixed(2) : 0;
-  const donePercentage = total > 0 ? ((done / total) * 100).toFixed(2) : 0;
+  const statItems = [
+    {
+      label: 'Total Reports',
+      value: stats.total,
+      icon: <FaListAlt size={50} color="#2196F3" />,
+      description: 'All submitted reports',
+      percentage: '100%',
+    },
+    {
+      label: 'Accepted',
+      value: stats.accepted,
+      icon: <FaTasks size={50} color="#00BCD4" />,
+      description: 'Being handled by staff',
+      percentage: getPercentage(stats.accepted),
+    },
+    {
+      label: 'Done',
+      value: stats.done,
+      icon: <FaCheckDouble size={50} color="#4CAF50" />,
+      description: 'Resolved reports',
+      percentage: getPercentage(stats.done),
+    },
+  ];
 
-  // Bar chart data
   const barChartData = {
     labels: ['Total', 'Accepted', 'Done'],
     datasets: [
       {
-        label: 'Reports Count',
-        data: [total, accepted, done],
+        label: 'Report Count',
+        data: [stats.total, stats.accepted, stats.done],
         backgroundColor: ['#2196F3', '#00BCD4', '#4CAF50'],
-        borderColor: ['#2196F3', '#00BCD4', '#4CAF50'],
-        borderWidth: 1,
       },
     ],
   };
 
-  // Line chart data
-  const lineChartData = {
-    labels: ['Total', 'Accepted', 'Done'],
-    datasets: [
-      {
-        label: 'Reports',
-        data: [total, accepted, done],
-        fill: false,
-        borderColor: '#2196F3',
-        tension: 0.1,
-      },
-    ],
-  };
-
-  // Pie chart data
-  const pieChartData = {
-    labels: ['Accepted', 'Done', 'Pending'],
-    datasets: [
-      {
-        data: [accepted, done, total - accepted - done],
-        backgroundColor: ['#00BCD4', '#4CAF50', '#2196F3'],
-        hoverOffset: 4,
-      },
-    ],
+  const barChartOptions = {
+    responsive: true,
+    plugins: {
+      legend: { display: false },
+      title: { display: true, text: 'Reports Overview (Bar Chart)' },
+    },
   };
 
   return (
     <div className="home-container">
       <h1 className="dashboard-heading">Statistics Overview</h1>
-      <div className="charts-container">
-        {/* Bar Chart */}
-        <div className="chart-box">
-          <h2>Reports Breakdown (Bar Chart)</h2>
-          <Bar data={barChartData} options={{ responsive: true }} />
-          {/* Displaying the percentages */}
-          <h3>All Reports: {totalPercentage}%</h3>
-          <h3>Accepted: {acceptedPercentage}%</h3>
-          <h3>Done: {donePercentage}%</h3>
-        </div>
 
-        {/* Line Chart */}
-        <div className="chart-box">
-          <h2>Reports Trends (Line Chart)</h2>
-          <Line data={lineChartData} options={{ responsive: true }} />
-          {/* Displaying the percentages */}
-          <h3>All Reports: {totalPercentage}%</h3>
-          <h3>Accepted: {acceptedPercentage}%</h3>
-          <h3>Done: {donePercentage}%</h3>
-        </div>
+      {/* Icon/stat boxes */}
+      <div className="chart-boxes">
+        {statItems.map((item, index) => (
+          <ChartBox
+            key={index}
+            label={item.label}
+            value={item.value}
+            icon={item.icon}
+            description={item.description}
+            percentage={item.percentage}
+          />
+        ))}
+      </div>
 
-        {/* Pie Chart */}
-        <div className="chart-box">
-          <h2>Reports Distribution (Pie Chart)</h2>
-          <Pie data={pieChartData} options={{ responsive: true }} />
-          {/* Displaying the percentages */}
-          <h3>All Reports: {totalPercentage}%</h3>
-          <h3>Accepted: {acceptedPercentage}%</h3>
-          <h3>Done: {donePercentage}%</h3>
-        </div>
+      {/* Bar chart */}
+      <div className="bar-chart-container">
+        <Bar data={barChartData} options={barChartOptions} />
       </div>
     </div>
   );
