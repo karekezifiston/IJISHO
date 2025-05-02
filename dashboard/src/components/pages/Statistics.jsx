@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { FaListAlt, FaCheckDouble, FaTasks } from 'react-icons/fa';
 import { Bar } from 'react-chartjs-2';
+import './Statistics.css';
 import {
   Chart as ChartJS,
   CategoryScale,
