@@ -1,109 +1,180 @@
 .sidebar {
-    width: 200px;
-    background-color: #15151553;
-    padding: 20px;
-    box-shadow: 2px 0 8px rgba(0, 0, 0, 0.1);
-    min-height: 100vh;
-    transition: transform 0.3s ease;
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 1000;
+  width: 200px;
+  background-color: #15151553;
+  padding: 20px;
+  box-shadow: 2px 0 8px rgba(0, 0, 0, 0.1);
+  min-height: 100vh;
+  transition: transform 0.3s ease;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+}
+
+/* Always visible on desktop */
+.sidebar.desktop {
+  transform: translateX(0);
+  position: static;
+}
+
+.settings-panel {
+  background-color: #f5f5f5;
+  padding: 10px 15px;
+  margin-left: 10px;
+  border-left: 2px solid #ccc;
+  font-size: 14px;
+  color: #333;
+}
+
+.settings-panel p {
+  margin: 5px 0;
+  cursor: pointer;
+}
+
+.settings-panel p:hover {
+  text-decoration: underline;
+}
+
+
+.settings-panel p {
+  margin: 5px 0;
+  cursor: pointer;
+}
+
+.settings-panel p:hover {
+  text-decoration: underline;
+}
+
+.settings-panel {
+  background-color: #ffffff;
+  padding: 10px 15px;
+  margin-left: 10px;
+  border-left: 2px solid #ccc;
+  font-size: 13px;
+  color: #191919;
+  font-weight:500;
+  margin-top:1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap:30px;
+  height:10rem;
+}
+
+.settings-panel p {
+  margin: 5px 0;
+  cursor: pointer;
+}
+
+.settings-panel p:hover {
+  text-decoration: underline;
+}
+
+.nav-link-btn {
+  display: block;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 13px 14px;
+  width:100%;
+  color: #989898;
+  text-decoration: none;
+  border-radius: 5px;
+  border:none;
+  font-size:15px;
+  transition: background-color 0.2s;
+  font-weight:600;
+  background-color: #000000;
+}
+
+
+
+/* Hidden by default on mobile */
+@media (max-width: 768px) {
+  .sidebar {
+    transform: translateX(-100%);
   }
-  
-  /* Always visible on desktop */
-  .sidebar.desktop {
+
+  .sidebar.open {
     transform: translateX(0);
-    position: static;
   }
-  
-  /* Hidden by default on mobile */
-  @media (max-width: 768px) {
-    .sidebar {
-      transform: translateX(-100%);
-    }
-  
-    .sidebar.open {
-      transform: translateX(0);
-    }
-  }
-  
-  .sidebar-title {
-    font-size: 24px;
-    font-weight: bold;
-  }
-  
-  .nav {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    margin-top: 20px;
-  }
-  
-  .nav-link {
-    display: block;
-    display: flex;
-    align-items: center;
-    gap:10px;
-    padding: 10px 15px;
-    color: #9e9e9e;
-    text-decoration: none;
-    border-radius: 5px;
-    transition: background-color 0.2s;
-    font-weight:500;
-  }
-  
-  .nav-link:hover {
-    background-color: #353536;
-    color: #7a7a7b;
-  }
-  
-  .nav-link.active {
-    background-color: #4949496d;
-    color: white;
-  }
-  
-  .sidebar-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  
-  /* Close (×) button */
+}
+
+.sidebar-title {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.nav {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.nav-link {
+  display: block;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 15px;
+  color: #9e9e9e;
+  text-decoration: none;
+  border-radius: 5px;
+  transition: background-color 0.2s;
+  font-weight: 500;
+}
+
+.nav-link:hover {
+  background-color: #353536;
+  color: #7a7a7b;
+}
+
+.nav-link.active {
+  background-color: #4949496d;
+  color: white;
+}
+
+.sidebar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Close (×) button */
+.close-btn {
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 24px;
+  cursor: pointer;
+  display: block;
+}
+
+/* Hide close button on desktop */
+@media (min-width: 769px) {
   .close-btn {
-    background: none;
-    border: none;
-    color: #fff;
-    font-size: 24px;
-    cursor: pointer;
+    display: none;
+  }
+}
+
+/* Hamburger toggle button */
+.sidebar-toggle {
+  display: none;
+  position: fixed;
+  top: 15px;
+  left: 15px;
+  background-color: #15151531;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  font-size: 18px;
+  cursor: pointer;
+  z-index: 1100;
+}
+
+@media (max-width: 768px) {
+  .sidebar-toggle {
     display: block;
   }
-  
-  /* Hide close button on desktop */
-  @media (min-width: 769px) {
-    .close-btn {
-      display: none;
-    }
-  }
-  
-  /* Hamburger toggle button */
-  .sidebar-toggle {
-    display: none;
-    position: fixed;
-    top: 15px;
-    left: 15px;
-    background-color: #15151531;
-    color: white;
-    border: none;
-    padding: 10px 15px;
-    font-size: 18px;
-    cursor: pointer;
-    z-index: 1100;
-  }
-  
-  @media (max-width: 768px) {
-    .sidebar-toggle {
-      display: block;
-    }
-  }
-  
+}
