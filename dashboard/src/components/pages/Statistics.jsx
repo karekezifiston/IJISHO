@@ -12,7 +12,6 @@ import {
 } from 'chart.js';
 import './Home.css';
 
-// Register ChartJS components
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
 const ChartBox = ({ label, value, icon, description, percentage }) => (
@@ -52,9 +51,8 @@ const Statistics = () => {
     fetchStatistics();
   }, []);
 
-  const getPercentage = (value) => {
-    return stats.total > 0 ? `${((value / stats.total) * 100).toFixed(1)}%` : '0%';
-  };
+  const getPercentage = (value) =>
+    stats.total > 0 ? `${((value / stats.total) * 100).toFixed(1)}%` : '0%';
 
   const statItems = [
     {
@@ -93,6 +91,10 @@ const Statistics = () => {
 
   const barChartOptions = {
     responsive: true,
+    maintainAspectRatio: false,
+    animation: {
+      duration: 0,
+    },
     plugins: {
       legend: { display: false },
       title: { display: true, text: 'Reports Overview (Bar Chart)' },
@@ -103,7 +105,6 @@ const Statistics = () => {
     <div className="home-container">
       <h1 className="dashboard-heading">Statistics Overview</h1>
 
-      {/* Icon/stat boxes */}
       <div className="chart-boxes">
         {statItems.map((item, index) => (
           <ChartBox
@@ -117,9 +118,8 @@ const Statistics = () => {
         ))}
       </div>
 
-      {/* Bar chart */}
       <div className="bar-chart-container">
-        <Bar data={barChartData} options={barChartOptions} />
+        <Bar data={barChartData} options={barChartOptions} height={400} />
       </div>
     </div>
   );
