@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'; 
+import React, { useEffect, useState } from 'react';
 import { FaListAlt, FaCheckDouble, FaTasks } from 'react-icons/fa';
 import { Bar } from 'react-chartjs-2';
 import './Statistics.css';
@@ -59,31 +59,31 @@ const Statistics = () => {
     {
       label: 'Total Reports',
       value: stats.total,
-      icon: <FaListAlt size={50} color="#2196F3" />,
+      icon: <FaListAlt size={50} color="#000000" />,
       description: 'All submitted reports',
       percentage: '100%',
     },
     {
       label: 'Accepted',
       value: stats.accepted,
-      icon: <FaTasks size={50} color="#00BCD4" />,
+      icon: <FaTasks size={50} color="#000000" />,
       description: 'Being handled by staff',
       percentage: getPercentage(stats.accepted),
     },
     {
       label: 'Done',
       value: stats.done,
-      icon: <FaCheckDouble size={50} color="#4CAF50" />,
+      icon: <FaCheckDouble size={50} color="#000000" />,
       description: 'Resolved reports',
       percentage: getPercentage(stats.done),
     },
   ];
 
-  // ✅ Centralized chart color configuration
+  // Centralized black chart color configuration
   const chartColors = {
-    backgroundColor: ['#2196F3', '#00BCD4', '#4CAF50'],
-    hoverBackgroundColor: ['#1976D2', '#0097A7', '#388E3C'],
-    borderColor: ['#0D47A1', '#006064', '#1B5E20'],
+    backgroundColor: ['#000000', '#000000', '#000000'],
+    hoverBackgroundColor: ['#333333', '#333333', '#333333'],
+    borderColor: ['#222222', '#222222', '#222222'],
   };
 
   const barChartData = {
@@ -104,7 +104,8 @@ const Statistics = () => {
     responsive: true,
     maintainAspectRatio: false,
     animation: {
-      duration: 0,
+      duration: 1000,
+      easing: 'easeOutQuart',
     },
     plugins: {
       legend: { display: false },
