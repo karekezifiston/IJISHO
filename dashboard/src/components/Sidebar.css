@@ -46,12 +46,12 @@
 }
 
 .settings-panel {
-  background-color: #ffffff;
+  background-color: #1c1c1c;
   padding: 10px 15px;
   margin-left: 10px;
-  border-left: 2px solid #ccc;
-  font-size: 13px;
-  color: #191919;
+  border-left: 2px solid #3b3b3b;
+  font-size: 14px;
+  color: #c3c1c1c1;
   font-weight:500;
   margin-top:1rem;
   display: flex;
