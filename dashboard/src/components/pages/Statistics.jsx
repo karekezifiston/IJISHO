@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react'; 
 import { FaListAlt, FaCheckDouble, FaTasks } from 'react-icons/fa';
 import { Bar } from 'react-chartjs-2';
 import './Statistics.css';
@@ -79,13 +79,23 @@ const Statistics = () => {
     },
   ];
 
+  // ✅ Centralized chart color configuration
+  const chartColors = {
+    backgroundColor: ['#2196F3', '#00BCD4', '#4CAF50'],
+    hoverBackgroundColor: ['#1976D2', '#0097A7', '#388E3C'],
+    borderColor: ['#0D47A1', '#006064', '#1B5E20'],
+  };
+
   const barChartData = {
     labels: ['Total', 'Accepted', 'Done'],
     datasets: [
       {
         label: 'Report Count',
         data: [stats.total, stats.accepted, stats.done],
-        backgroundColor: ['#2196F3', '#00BCD4', '#4CAF50'],
+        backgroundColor: chartColors.backgroundColor,
+        hoverBackgroundColor: chartColors.hoverBackgroundColor,
+        borderColor: chartColors.borderColor,
+        borderWidth: 1,
       },
     ],
   };
@@ -99,6 +109,14 @@ const Statistics = () => {
     plugins: {
       legend: { display: false },
       title: { display: true, text: 'Reports Overview (Bar Chart)' },
+    },
+    scales: {
+      y: {
+        beginAtZero: true,
+        ticks: {
+          precision: 0,
+        },
+      },
     },
   };
 
