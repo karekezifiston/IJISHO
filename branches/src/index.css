@@ -54,17 +54,18 @@ body {
 
 
 .district-selection {
+  background-color: black;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 50vh;
+  height: 60vh;
   margin-top: 5rem;
-  border:0.1px solid #cccccc3f; /* optional: add color for better visuals */
+  border:0.1px solid #cccccc13; /* optional: add color for better visuals */
   border-radius: 8px;      /* optional: smoother corners */
   padding: 1rem;           /* optional: adds internal spacing */
   box-sizing: border-box; /* ensures padding doesn't overflow */
-  width: 50%;
+  width: 40%;
   margin: 5rem auto 0 auto; /* top: 5rem, left/right: auto */
 }
 .district-selection h1{
@@ -73,6 +74,7 @@ body {
 
 }
 .district-selection form{
+  margin-top:1rem;
   display: flex;
   flex-direction:column;
   justify-content: center;
@@ -93,7 +95,7 @@ body {
 .district-selection button{
   padding:0.7rem 2rem;
   border-radius:0.5rem;
-  border:none;
+  border:solid 1px rgba(86, 86, 86, 0.961);
   background:black;
   color:white;
   font-size:1rem;
