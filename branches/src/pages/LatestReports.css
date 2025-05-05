@@ -1,0 +1,218 @@
+.all-reports-container {
+    flex-direction: column;
+    align-items: center;
+    padding: 40px 20px;
+    background-color: #0f0f0f;
+    min-height: 100vh;
+    color: #eaeaea;
+    width:80%;
+}
+
+/* ✅ Checkbox and selection styling */
+.report-list-item input[type="checkbox"] {
+    margin-right: 10px;
+    transform: scale(1.2);
+    accent-color: #ff4d4d; /* Red checkbox */
+    cursor: pointer;
+}
+
+/* ✅ Highlight selected items */
+.report-list-item.selected {
+    background-color: #333;
+    border: 1px solid #ff4d4d;
+}
+
+/* ✅ Delete toolbar */
+.delete-toolbar {
+    display: flex;
+    justify-content: flex-end;
+    background-color: #2a2a2a;
+    padding: 12px 20px;
+    margin-bottom: 15px;
+    border-radius: 10px;
+    box-shadow: 0 0 8px rgba(255, 77, 77, 0.2);
+}
+
+/* ✅ Delete button styling */
+.delete-button {
+    background-color: #ff4d4d;
+    color: #fff;
+    border: none;
+    padding: 8px 16px;
+    font-size: 14px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.delete-button:hover {
+    background-color: #e63c3c;
+}
+
+.reports-heading {
+    font-size: 28px;
+    font-weight: bold;
+    margin-bottom: 30px;
+    color: #ffffff;
+    text-align: center;
+    letter-spacing: 1px;
+}
+
+.latest-reports {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+    max-width: 90%;
+    background-color: #1a1a1a;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+
+    /* ✅ Fix overflow issue */
+    word-break: break-word;
+    overflow-wrap: anywhere;
+}
+
+/* Report item layout like iPhone Mail app */
+.report-list-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 18px 16px;
+    background-color: #222;
+    border-radius: 10px;
+    margin-bottom: 14px;
+    transition: background-color 0.2s ease;
+    cursor: pointer;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.report-list-item:hover {
+    background-color: #000000;
+}
+
+.report-main {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    overflow: hidden;
+}
+
+.report-title {
+    font-weight: 600;
+    font-size: 16px;
+    color: #ffffff;
+    margin-bottom: 6px;
+
+    /* ✅ Allow wrapping to prevent overflow */
+    white-space: normal;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
+    word-break: break-word;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    max-width: 26rem;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.report-meta {
+    font-size: 13px;
+    color: #bbbbbb;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    overflow: hidden;
+
+    /* ✅ Prevent overflow of meta info */
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.report-meta span {
+    /* ✅ Force long strings to break on small screens */
+    word-break: break-word;
+    overflow-wrap: anywhere;
+}
+
+.report-type {
+    background-color: #3b3b3b;
+    padding: 2px 8px;
+    border-radius: 6px;
+    font-size: 12px;
+    color: #ddd;
+}
+
+.report-time {
+    font-size: 12px;
+    color: #aaa;
+    white-space: nowrap;
+    margin-left: auto;
+    padding-top: 2px;
+}
+
+/* Responsive: tablet */
+@media (max-width: 1097px) {
+    .report-list-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+
+    .report-time {
+        align-self: flex-end;
+        margin-left: 0;
+    }
+
+    .report-title {
+        font-size: 15px;
+        max-width: 10rem;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
+
+    .report-meta {
+        font-size: 12px;
+
+        /* ✅ Let meta wrap too */
+        white-space: normal;
+        text-overflow: unset;
+    }
+}
+
+/* Responsive: mobile */
+@media (max-width: 480px) {
+    .reports-heading {
+        font-size: 24px;
+    }
+
+    .latest-reports {
+        padding: 15px;
+    }
+
+    .report-title {
+        font-size: 14px;
+    }
+
+    .report-meta {
+        flex-direction: column;
+        gap: 4px;
+        font-size: 12px;
+        white-space: normal;
+        overflow: hidden;
+    }
+
+    .report-type {
+        font-size: 11px;
+        padding: 2px 6px;
+    }
+
+    .report-time {
+        font-size: 11px;
+    }
+}

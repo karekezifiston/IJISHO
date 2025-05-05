@@ -1,28 +1,40 @@
 // src/DistrictContext.js
 
-import React, { createContext, useContext, useState } from 'react';
+import React, { createContext, useContext, useState, useEffect } from 'react';
 
-// Create the context
 const DistrictContext = createContext();
 
-// Create a provider to wrap your app with
 export const DistrictProvider = ({ children }) => {
-  const [district, setDistrict] = useState(localStorage.getItem('district') || '');  // Initialize from localStorage
+  const [district, setDistrict] = useState('');
+  const [allReports, setAllReports] = useState([]);
 
-  // Save selected district to localStorage
-  const selectDistrict = (district) => {
-    setDistrict(district);
-    localStorage.setItem('district', district);  // Save to localStorage so it persists across reloads
+  useEffect(() => {
+    // Load selected district from localStorage
+    const savedDistrict = localStorage.getItem('selectedDistrict');
+    if (savedDistrict) {
+      setDistrict(savedDistrict);
+    }
+
+    // Fetch all reports once
+    fetch('http://localhost:5000/api/reports')
+      .then((res) => res.json())
+      .then((data) => setAllReports(data))
+      .catch((err) => console.error('Failed to fetch reports:', err));
+  }, []);
+
+  const selectDistrict = (selected) => {
+    setDistrict(selected);
+    localStorage.setItem('selectedDistrict', selected); // persist it
   };
 
+  // Filter reports based on selected district
+  const filteredReports = allReports.filter((report) => report.district === district);
+
   return (
-    <DistrictContext.Provider value={{ district, selectDistrict }}>
+    <DistrictContext.Provider value={{ district, selectDistrict, filteredReports }}>
       {children}
     </DistrictContext.Provider>
   );
 };
 
-// Custom hook to access the district context
-export const useDistrict = () => {
-  return useContext(DistrictContext);
-};
+export const useDistrict = () => useContext(DistrictContext);
