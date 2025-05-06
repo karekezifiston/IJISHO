@@ -1,12 +1,10 @@
-// src/pages/LatestReports.js
-
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDistrict } from '../DistrictContext';
 import './LatestReports.css';
 
 const LatestReports = () => {
-  const { filteredReports } = useDistrict();
+  const { district, filteredReports } = useDistrict();  // Access the selected district
   const [selectedReports, setSelectedReports] = React.useState([]);
   const navigate = useNavigate();
 
@@ -66,7 +64,9 @@ const LatestReports = () => {
 
   return (
     <div className="all-reports-container">
-      <h2 className="reports-heading">Latest Reports</h2>
+      <h2 className="reports-heading">
+        {district ? `${district} Latest Reports` : 'Latest Reports'}
+      </h2>
 
       {selectedReports.length > 0 && (
         <div className="action-toolbar">

@@ -1,10 +1,11 @@
-// src/pages/DashboardLayout.jsx
 import React from 'react';
 import { Outlet, useNavigate, useLocation } from 'react-router-dom';
 import { FaFileAlt, FaCheckCircle, FaRegCheckCircle } from 'react-icons/fa';
+import { useDistrict } from '../DistrictContext';  // Import the hook
 import './DashboardLayout.css';
 
 const DashboardLayout = () => {
+  const { district } = useDistrict();  // Access the selected district from context
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -14,7 +15,9 @@ const DashboardLayout = () => {
 
   return (
     <div className="layout-content">
-      <h1 className="dashboard-heading">Dashboard</h1>
+      <h1 className="dashboard-heading">
+        {district ? `${district} Dashboard` : 'Dashboard'}
+      </h1>
 
       {!isLatestReports && !isAcceptedReports && !isDoneReports && (
         <div className="dashboard-boxes">

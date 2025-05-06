@@ -54,7 +54,7 @@ body {
 
 
 .district-selection {
-  background-color: black;
+  background-color: rgb(18, 18, 18);
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -62,14 +62,15 @@ body {
   height: 60vh;
   margin-top: 5rem;
   border:0.1px solid #cccccc13; /* optional: add color for better visuals */
-  border-radius: 8px;      /* optional: smoother corners */
+  border-radius:20px;      /* optional: smoother corners */
   padding: 1rem;           /* optional: adds internal spacing */
   box-sizing: border-box; /* ensures padding doesn't overflow */
   width: 40%;
   margin: 5rem auto 0 auto; /* top: 5rem, left/right: auto */
+  box-shadow:1px 1px 5px 3px black;
 }
 .district-selection h1{
-  font-size:2.5rem;
+  font-size:2rem;
   color: #979797;
 
 }
@@ -82,7 +83,7 @@ body {
   gap:3rem;
 }
 .district-selection select{
-  padding:0.5rem;
+  padding:0.5rem 1rem;
   border-radius:0.5rem;
   border:1px soldid #ccc;
   background-color:#ffffff;
@@ -95,7 +96,7 @@ body {
 .district-selection button{
   padding:0.7rem 2rem;
   border-radius:0.5rem;
-  border:solid 1px rgba(86, 86, 86, 0.961);
+  border:solid 1px rgba(86, 86, 86, 0.445);
   background:black;
   color:white;
   font-size:1rem;
@@ -103,6 +104,6 @@ body {
   cursor:pointer;
 }
 .district-selection button:hover{
-  background: #0d0d0d98;
+  background: #2b2b2b30;
 }
 
