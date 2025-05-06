@@ -74,7 +74,7 @@ const LatestReports = () => {
 
   return (
     <div className="all-reports-container">
-      <h2 className="reports-heading">Latest Reports</h2>
+      <h2 className="reports-heading">All Reports</h2>
 
       {selectedReports.length > 0 && (
         <div className="action-toolbar">

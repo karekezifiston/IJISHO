@@ -65,7 +65,7 @@ const LatestReports = () => {
   return (
     <div className="all-reports-container">
       <h2 className="reports-heading">
-        {district ? `${district} Latest Reports` : 'Latest Reports'}
+        {district ? `${district} Reports` : 'Latest Reports'}
       </h2>
 
       {selectedReports.length > 0 && (
