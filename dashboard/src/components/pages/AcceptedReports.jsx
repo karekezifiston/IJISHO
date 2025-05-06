@@ -33,26 +33,31 @@ const AcceptedReports = () => {
   };
 
   const handleDelete = async () => {
-    // Example: Delete from frontend only (you can extend this to delete on the backend)
-    const updatedReports = reports.filter((report) => !selectedReports.includes(report._id));
-    setReports(updatedReports);
-    setSelectedReports([]);
-    
-    // Make API call to delete on the backend (optional)
-    // await fetch(`http://localhost:5000/api/reports/${reportId}`, { method: 'DELETE' });
+    try {
+      // Delete from frontend only (for immediate UI update)
+      const updatedReports = reports.filter((report) => !selectedReports.includes(report._id));
+      setReports(updatedReports);
+      setSelectedReports([]);
+
+      // Make API call to delete on the backend
+      for (const reportId of selectedReports) {
+        await fetch(`http://localhost:5000/api/reports/${reportId}`, { method: 'DELETE' });
+      }
+    } catch (error) {
+      console.error('Failed to delete reports:', error);
+    }
   };
 
   const handleDecline = async () => {
-    // Unaccept reports selected
     try {
       for (const reportId of selectedReports) {
         await fetch(`http://localhost:5000/api/reports/${reportId}/unaccept`, {
           method: 'PATCH',
         });
       }
-      
+
       // Update the local state to reflect the changes
-      const updatedReports = reports.map((report) => 
+      const updatedReports = reports.map((report) =>
         selectedReports.includes(report._id)
           ? { ...report, isAccepted: false }
           : report
@@ -64,6 +69,27 @@ const AcceptedReports = () => {
     }
   };
 
+  const handleMarkComplete = async () => {
+    try {
+      for (const reportId of selectedReports) {
+        await fetch(`http://localhost:5000/api/reports/${reportId}/done`, {
+          method: 'PATCH',
+        });
+      }
+
+      // Optionally update state to reflect completion visually
+      const updatedReports = reports.map((report) =>
+        selectedReports.includes(report._id)
+          ? { ...report, completed: true } // Add a new property to mark completion
+          : report
+      );
+      setReports(updatedReports);
+      setSelectedReports([]);
+    } catch (error) {
+      console.error('Failed to mark reports as complete:', error);
+    }
+  };
+
   return (
     <div className="all-reports-container">
       <h2 className="reports-heading">Accepted Reports</h2>
@@ -71,6 +97,7 @@ const AcceptedReports = () => {
       {selectedReports.length > 0 && (
         <div className="delete-toolbar">
           <button className="decline-button" onClick={handleDecline}>Remove</button>
+          <button className="complete-button" onClick={handleMarkComplete}>Mark Complete</button>
           <button className="delete-button" onClick={handleDelete}>Delete Selected</button>
         </div>
       )}

@@ -69,6 +69,20 @@
 .decline-button:hover {
   background-color: #decd1226;
 }
+.complete-button {
+  background-color: #28a745;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  margin: 0 8px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.complete-button:hover {
+  background-color: #218838;
+}
+
 
 /* ✅ Report item styling */
 .report-list-item {
