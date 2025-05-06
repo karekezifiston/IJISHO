@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import './ReportDetails.css';
+import './AcceptedReportDetail.css';
 
-const ReportDetail = () => {
+const AcceptedReportDetail = () => {
   const { id } = useParams();
   const [report, setReport] = useState(null);
   const [isFullScreen, setIsFullScreen] = useState(false);
@@ -14,27 +14,27 @@ const ReportDetail = () => {
       .catch(err => console.error('Failed to fetch report:', err));
   }, [id]);
 
-  const handleImageClick = () => setIsFullScreen(true);
-  const handleCloseFullScreen = () => setIsFullScreen(false);
-
-  const handleAcceptReport = () => {
-    fetch(`http://localhost:5000/api/reports/${id}/accept`, {
+  const handleDoneReport = () => {
+    fetch(`http://localhost:5000/api/reports/${id}/done`, {
       method: 'PATCH',
       headers: { 'Content-Type': 'application/json' },
     })
       .then(res => {
         if (res.ok) {
-          alert('Report accepted successfully!');
-          setReport(prev => ({ ...prev, isAccepted: true, completed: true }));
+          alert('Report marked as done!');
+          setReport(prev => ({ ...prev, isDone: true }));
         } else {
-          throw new Error('Failed to accept the report.');
+          throw new Error('Failed to mark the report as done.');
         }
       })
       .catch(err => {
         console.error(err);
-        alert('An error occurred while accepting the report.');
+        alert('An error occurred while marking the report as done.');
       });
   };
+
+  const handleImageClick = () => setIsFullScreen(true);
+  const handleCloseFullScreen = () => setIsFullScreen(false);
 
   if (!report) return <div>Loading...</div>;
 
@@ -43,16 +43,13 @@ const ReportDetail = () => {
       <div className="report-right">
         <div className="crime-header">
           <h1 className="crime-type">Crime: {report.crimeType}</h1>
-
-          {report.completed ? (
-            <button className="done-button" disabled>✅ Done</button>
-          ) : (
-            <button className="accept-button" onClick={handleAcceptReport}>Accept</button>
-          )}
+          <button className="done-button" onClick={handleDoneReport} disabled={report.isDone}>
+            {report.isDone ? 'Done' : 'Mark as Done'}
+          </button>
         </div>
 
         <div className="report-header">
-          <p className="report-date">{new Date(report.dateTime.$date).toLocaleString()}</p>
+          <p className="report-date">{new Date(report.dateTime).toLocaleString()}</p>
         </div>
 
         <div className="location-container">
@@ -111,4 +108,4 @@ const ReportDetail = () => {
   );
 };
 
-export default ReportDetail;
+export default AcceptedReportDetail;

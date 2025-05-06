@@ -1,0 +1,13 @@
+.done-button{
+    padding: 10px 16px;
+      background-color: #4caf50;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 13px !important;
+      text-wrap: nowrap;
+      display: inline-block;
+      transition: background-color 0.3s;
+  }
