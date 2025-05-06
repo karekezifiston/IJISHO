@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useDistrict } from '../DistrictContext'; // import context
 
 const DoneReports = () => {
   const [reports, setReports] = useState([]);
   const [selectedReports, setSelectedReports] = useState([]);
+  const { district } = useDistrict(); // get selected district
 
   useEffect(() => {
     fetch('http://localhost:5000/api/done-reports')
@@ -39,7 +41,6 @@ const DoneReports = () => {
       })
         .then((res) => res.json())
         .then((data) => {
-          // Update the reports state after marking uncomplete
           setReports((prevReports) =>
             prevReports.map((report) =>
               report._id === reportId ? { ...report, completed: false } : report
@@ -50,6 +51,9 @@ const DoneReports = () => {
     });
     setSelectedReports([]);
   };
+
+  // Filter reports by selected district
+  const filteredReports = reports.filter((report) => report.district === district);
 
   return (
     <div className="all-reports-container">
@@ -63,10 +67,10 @@ const DoneReports = () => {
       )}
 
       <div className="done-reports">
-        {reports.length === 0 ? (
-          <p>No done reports available.</p>
+        {filteredReports.length === 0 ? (
+          <p>No done reports available for {district || 'this district'}.</p>
         ) : (
-          reports.map((report) => (
+          filteredReports.map((report) => (
             <div
               key={report._id}
               className={`report-list-item ${selectedReports.includes(report._id) ? 'selected' : ''}`}

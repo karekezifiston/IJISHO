@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './AcceptedReports.css';
+import { useDistrict } from '../DistrictContext'; // ✅ import
 
 const AcceptedReports = () => {
   const [reports, setReports] = useState([]);
   const [selectedReports, setSelectedReports] = useState([]);
   const navigate = useNavigate();
+  const { district } = useDistrict(); // ✅ use selected district
 
   useEffect(() => {
     fetch('http://localhost:5000/api/accepted-reports')
@@ -13,6 +15,8 @@ const AcceptedReports = () => {
       .then(data => setReports(data))
       .catch(err => console.error('Failed to fetch accepted reports:', err));
   }, []);
+
+  const filteredReports = reports.filter(report => report.district === district); // ✅ filter
 
   const handleReportClick = (reportId) => {
     navigate(`/accepted/${reportId}`);
@@ -34,12 +38,9 @@ const AcceptedReports = () => {
 
   const handleDelete = async () => {
     try {
-      // Delete from frontend only (for immediate UI update)
       const updatedReports = reports.filter((report) => !selectedReports.includes(report._id));
       setReports(updatedReports);
       setSelectedReports([]);
-
-      // Make API call to delete on the backend
       for (const reportId of selectedReports) {
         await fetch(`http://localhost:5000/api/reports/${reportId}`, { method: 'DELETE' });
       }
@@ -56,7 +57,6 @@ const AcceptedReports = () => {
         });
       }
 
-      // Update the local state to reflect the changes
       const updatedReports = reports.map((report) =>
         selectedReports.includes(report._id)
           ? { ...report, isAccepted: false }
@@ -77,10 +77,9 @@ const AcceptedReports = () => {
         });
       }
 
-      // Optionally update state to reflect completion visually
       const updatedReports = reports.map((report) =>
         selectedReports.includes(report._id)
-          ? { ...report, completed: true } // Add a new property to mark completion
+          ? { ...report, completed: true }
           : report
       );
       setReports(updatedReports);
@@ -103,10 +102,10 @@ const AcceptedReports = () => {
       )}
 
       <div className="accepted-reports">
-        {reports.length === 0 ? (
-          <p>No accepted reports available.</p>
+        {filteredReports.length === 0 ? (
+          <p>No accepted reports available for this district.</p>
         ) : (
-          reports.map((report) => (
+          filteredReports.map((report) => (
             <div
               key={report._id}
               className={`report-list-item ${selectedReports.includes(report._id) ? 'selected' : ''}`}
