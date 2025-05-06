@@ -4,7 +4,7 @@ import { useDistrict } from '../DistrictContext';
 import './LatestReports.css';
 
 const LatestReports = () => {
-  const { district, filteredReports } = useDistrict();  // Access the selected district
+  const { district, filteredReports } = useDistrict(); // Access the selected district
   const [selectedReports, setSelectedReports] = React.useState([]);
   const navigate = useNavigate();
 
@@ -84,14 +84,15 @@ const LatestReports = () => {
           <div
             key={report._id}
             className={`report-list-item ${selectedReports.includes(report._id) ? 'selected' : ''}`}
+            onClick={() => handleReportClick(report._id)} // Entire container is clickable
           >
             <input
               type="checkbox"
               checked={selectedReports.includes(report._id)}
               onChange={() => handleCheckboxChange(report._id)}
-              onClick={(e) => e.stopPropagation()}
+              onClick={(e) => e.stopPropagation()} // Prevent navigation when clicking checkbox
             />
-            <div onClick={() => handleReportClick(report._id)} className="report-main">
+            <div className="report-main">
               <div className="report-title">{report.description}</div>
               <div className="report-meta">
                 <span>{report.district}, {report.sector}, {report.cell}</span>

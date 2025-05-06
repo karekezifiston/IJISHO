@@ -87,7 +87,35 @@
   margin-bottom: 10px;
 }
 
-/* Full-Screen Modal */
+/* Accept / Done Button */
+.accept-button {
+  padding: 10px 16px;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 13px !important;
+  text-wrap: nowrap;
+  display: inline-block;
+  transition: background-color 0.3s;
+}
+
+.accept-button:hover {
+  background-color: #45a049;
+}
+
+.done-button {
+  padding: 10px 16px;
+  background-color: #888;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-weight: 600;
+}
+
+/* Full-Screen Modal (if added later) */
 .full-screen-modal {
   position: fixed;
   top: 0;
@@ -95,27 +123,22 @@
   right: 0;
   bottom: 0;
   background-color: rgba(0, 0, 0, 0.8);
-  /* Black background */
   display: flex;
   justify-content: center;
   align-items: center;
   z-index: 1000;
-  /* Bring the modal to the front */
 }
 
 .modal-content {
   position: relative;
   width: 80%;
-  /* Image will take 80% of the screen width */
   height: 80%;
-  /* Image will take 80% of the screen height */
   display: flex;
   justify-content: center;
   align-items: center;
   background-color: #000000;
   padding: 20px;
   border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
 
 .full-screen-image {
@@ -131,68 +154,27 @@
   background-color: #ffffff;
   color: #000000;
   border: none;
-  padding: 7px;
+  padding: 10px;
   border-radius:10%;
   font-size: 18px;
   cursor: pointer;
-  transition: background-color 0.3s;
 }
 
 .close-button:hover {
   background-color: #4b4b4b;
 }
 
-/* Close the full-screen on click outside the image */
-.full-screen-modal:hover {
-  cursor: pointer;
-}
-
-.full-screen-modal .modal-content {
-  cursor: initial;
-}
-
-/* Accept Button styling */
-.accept-button {
-  padding: 10px 16px;
-  background-color: #4caf50;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  font-weight: 600;
-  font-size: 13px !important;
-  text-wrap: nowrap;
-  display: inline-block;
-  /* Ensure it fits properly in the container */
-  transition: background-color 0.3s;
-}
-
-.accept-button:hover {
-  background-color: #45a049;
-}
-
-/* Adjustments for mobile view */
-@media (max-width:988px) {
+/* Mobile Responsive */
+@media (max-width: 988px) {
   .crime-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    text-wrap: nowrap;
-    width: 100%;
     gap: 20vw;
   }
 }
-@media (max-width:859px) {
+@media (max-width: 859px) {
   .crime-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    text-wrap: nowrap;
-    width: 100%;
-    gap:10vw;
+    gap: 10vw;
   }
 }
-
 @media (max-width: 768px) {
   .report-detail-container {
     flex-direction: column;
@@ -226,21 +208,14 @@
     width: 100%;
   }
 
-  /* Accept Button styling adjustments for mobile */
   .crime-header {
     flex-direction: column;
-    /* Stack elements vertically on smaller screens */
     gap: 10px;
-    /* Adjust gap to make space between elements */
     align-items: center;
-    /* Center align the elements */
   }
 
   .accept-button {
-    /* Increase padding for better click area */
     font-size: 16px;
-    /* Slightly larger font size for readability */
     text-align: center;
-    /* Center the button text */
   }
 }
