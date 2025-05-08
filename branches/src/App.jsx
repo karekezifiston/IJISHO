@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { DistrictProvider } from './DistrictContext';
 import DistrictSelection from './DistrictSelection';
 import Dashboard from './pages/Dashboard';
+import Statistics from './pages/Statistics';
 import DashboardLayout from './pages/DashboardLayout';
 import LatestReports from './pages/LatestReports';
 import AcceptedReports from './pages/AcceptedReports';
@@ -25,6 +26,9 @@ const App = () => {
               <Route path="latest" element={<LatestReports />} />
               <Route path="accepted" element={<AcceptedReports />} />
               <Route path="done" element={<DoneReports />} />
+            </Route>
+
+            <Route path="/statistics" element={<Statistics/>}>
             </Route>
 
             {/* ✅ Individual report details */}
