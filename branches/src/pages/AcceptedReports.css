@@ -1,135 +1,170 @@
 /* ✅ Checkbox and selection styling */
 .report-list-item input[type="checkbox"] {
-    margin-right: 10px;
-    transform: scale(1.2);
-    accent-color: #ff4d4d;
-    cursor: pointer;
-  }
-  
-  /* ✅ Highlight selected items */
-  .report-list-item.selected {
-    background-color: #333;
-    border: 1px solid #2a2a2a;
-  }
-  
-  /* ✅ Delete and Decline toolbar */
-  .delete-toolbar {
-    display: flex;
-    justify-content: flex-end;
-    background-color: #2a2a2a;
-    padding: 12px 20px;
-    margin-bottom: 15px;
-    border-radius: 10px;
-    box-shadow: 0 0 8px rgba(255, 77, 77, 0.2);
-  }
-  
-  /* ✅ Delete button styling */
-  .delete-button {
-    background-color: #e60707; /* Green */
-    color: white;
-    border: none;
-    padding: 8px 16px;
-    font-size: 14px;
-    border-radius: 6px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    margin-left: 10px;
-  }
-  
-  .delete-button:hover {
-    background-color: #950202;
-  }
-  .accept-button {
-    background-color: #4CAF50; /* Green background */
-    color: white;
-    padding: 10px;
-    margin-left: 10px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  .accept-button:hover {
-    background-color: #45a049d2; /* Darker green */
-  }
-  
-  
-  /* ✅ Decline button styling */
-  .decline-button {
-    background-color: #decd12ad; /* Red */
-    color: white;
-    border: none;
-    padding: 8px 16px;
-    font-size: 14px;
-    border-radius: 6px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  
-  .decline-button:hover {
-    background-color: #decd1226;
-  }
-  .complete-button {
-    background-color: #28a745;
-    color: white;
-    border: none;
-    padding: 8px 12px;
-    margin: 0 8px;
-    border-radius: 4px;
-    cursor: pointer;
-  }
-  
-  .complete-button:hover {
-    background-color: #218838;
-  }
-  
-  
-  /* ✅ Report item styling */
-  .report-list-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 12px;
-    margin-bottom: 12px;
-    border-radius: 8px;
-    box-shadow: 0 0 6px rgba(0, 0, 0, 0.1);
-    transition: background-color 0.3s ease;
-  }
-  
-  .report-list-item:hover {
-    background-color: #000000;
-  }
-  
-  .report-main {
-    flex-grow: 1;
-    cursor: pointer;
-  }
-  
-  .report-title {
-    font-weight: bold;
-    font-size: 16px;
-  }
-  
-  .report-meta {
-    font-size: 14px;
-    color: #555;
-  }
-  
-  .report-time {
-    font-size: 12px;
-    color: #777;
-  }
-  .uncomplete-button {
-    background-color: #f5b342b5; /* Change the background color */
-    color: white;
-    padding: 10px;
-    margin-left: 10px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  .uncomplete-button:hover {
-    background-color: #f5b34265;
-  }
-  
-  
+  margin-right: 10px;
+  transform: scale(1.2);
+  accent-color: #ff4d4d;
+  cursor: pointer;
+}
+
+/* ✅ Highlight selected items */
+.report-list-item.selected {
+  background-color: #333;
+  border: 1px solid #2a2a2a;
+}
+
+.accepted-reports {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+  max-width: 90%;
+  background-color: #1a1a1a;
+  border-radius: 12px;
+  padding:12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  word-break: break-word;
+  overflow-wrap: anywhere;
+}
+.done-reports {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+  max-width: 90%;
+  background-color: #1a1a1a;
+  border-radius: 12px;
+  padding: 7px 10px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  word-break: break-word;
+  overflow-wrap: anywhere;
+}
+
+/* ✅ Delete and Decline toolbar */
+.delete-toolbar {
+  display: flex;
+  justify-content: flex-end;
+  background-color: #2a2a2a;
+  padding: 12px 20px;
+  margin-bottom: 15px;
+  border-radius: 10px;
+  box-shadow: 0 0 8px rgba(255, 77, 77, 0.2);
+}
+
+/* ✅ Delete button styling */
+.delete-button {
+  background-color: #e60707;
+  /* Green */
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  font-size: 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-left: 10px;
+}
+
+.delete-button:hover {
+  background-color: #950202;
+}
+
+.accept-button {
+  background-color: #4CAF50;
+  /* Green background */
+  color: white;
+  padding: 10px;
+  margin-left: 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.accept-button:hover {
+  background-color: #45a049d2;
+  /* Darker green */
+}
+
+
+/* ✅ Decline button styling */
+.decline-button {
+  background-color: #decd12ad;
+  /* Red */
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  font-size: 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.decline-button:hover {
+  background-color: #decd1226;
+}
+
+.complete-button {
+  background-color: #28a745;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  margin: 0 8px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.complete-button:hover {
+  background-color: #218838;
+}
+
+
+/* ✅ Report item styling */
+.report-list-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 13px 16px;
+  width: 100%;
+  margin-bottom: 12px;
+  border-radius: 8px;
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease;
+}
+
+.report-list-item:hover {
+  background-color: #000000;
+}
+
+.report-main {
+  flex-grow: 1;
+  cursor: pointer;
+}
+
+.report-title {
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.report-meta {
+  font-size: 14px;
+  color: #555;
+}
+
+.report-time {
+  font-size: 12px;
+  color: #777;
+}
+
+.uncomplete-button {
+  background-color: #f5b342b5;
+  /* Change the background color */
+  color: white;
+  padding: 10px;
+  margin-left: 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.uncomplete-button:hover {
+  background-color: #f5b34265;
+}
