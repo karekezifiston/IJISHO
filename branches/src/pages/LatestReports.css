@@ -23,15 +23,19 @@
 
 /* Style for the "Accepted" status text */
 .accepted-status {
-    font-size: 14px;
     color: green;
-    font-weight: bold;
     background-color: #e2f5e2;
-    padding: 4px 10px;
-    border-radius: 12px;
-    text-align: center;
-    margin-left: auto;
+    padding: 10px 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 13px !important;
+    text-wrap: nowrap;
     display: inline-block;
+    transition: background-color;
+    margin-right:10px;
+
 }
 
 /* ✅ Highlight selected items */
@@ -177,13 +181,17 @@
   }
   
   .solved-status {
-    background-color: #136900;
-    padding: 7px 8px;
-    border-radius: 6px;
-    font-size: 12px;
-    color: #fff;
-    margin-left: 10px;
-    font-weight:bold;
+    padding: 10px 16px;
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 13px !important;
+    text-wrap: nowrap;
+    display: inline-block;
+    transition: background-color;
   }
   
 
