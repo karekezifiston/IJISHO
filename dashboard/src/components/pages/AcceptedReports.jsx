@@ -34,12 +34,10 @@ const AcceptedReports = () => {
 
   const handleDelete = async () => {
     try {
-      // Delete from frontend only (for immediate UI update)
       const updatedReports = reports.filter((report) => !selectedReports.includes(report._id));
       setReports(updatedReports);
       setSelectedReports([]);
 
-      // Make API call to delete on the backend
       for (const reportId of selectedReports) {
         await fetch(`http://localhost:5000/api/reports/${reportId}`, { method: 'DELETE' });
       }
@@ -56,12 +54,7 @@ const AcceptedReports = () => {
         });
       }
 
-      // Update the local state to reflect the changes
-      const updatedReports = reports.map((report) =>
-        selectedReports.includes(report._id)
-          ? { ...report, isAccepted: false }
-          : report
-      );
+      const updatedReports = reports.filter((report) => !selectedReports.includes(report._id));
       setReports(updatedReports);
       setSelectedReports([]);
     } catch (error) {
@@ -77,10 +70,9 @@ const AcceptedReports = () => {
         });
       }
 
-      // Optionally update state to reflect completion visually
       const updatedReports = reports.map((report) =>
         selectedReports.includes(report._id)
-          ? { ...report, completed: true } // Add a new property to mark completion
+          ? { ...report, completed: true }
           : report
       );
       setReports(updatedReports);
@@ -109,8 +101,9 @@ const AcceptedReports = () => {
           reports.map((report) => (
             <div
               key={report._id}
-              className={`report-list-item ${selectedReports.includes(report._id) ? 'selected' : ''}`}
+              className={`report-list-item ${selectedReports.includes(report._id) ? 'selected' : ''} ${report.completed ? 'completed' : ''}`}
             >
+             
               <input
                 type="checkbox"
                 checked={selectedReports.includes(report._id)}
@@ -124,6 +117,7 @@ const AcceptedReports = () => {
                 </div>
               </div>
               <div className="report-time">{formatDate(report.dateTime)}</div>
+              {report.completed && <span className="done-label">Done</span>}
             </div>
           ))
         )}

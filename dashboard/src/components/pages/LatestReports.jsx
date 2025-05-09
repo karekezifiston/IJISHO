@@ -11,11 +11,14 @@ const LatestReports = () => {
     fetchReports();
   }, []);
 
-  const fetchReports = () => {
-    fetch('http://localhost:5000/api/reports')
-      .then((res) => res.json())
-      .then((data) => setReports(data))
-      .catch((err) => console.error('Error fetching reports:', err));
+  const fetchReports = async () => {
+    try {
+      const res = await fetch('http://localhost:5000/api/reports');
+      const data = await res.json();
+      setReports(data);
+    } catch (err) {
+      console.error('Error fetching reports:', err);
+    }
   };
 
   const handleReportClick = (reportId) => {
@@ -23,11 +26,10 @@ const LatestReports = () => {
   };
 
   const formatDate = (date) => {
+    const d = new Date(date);
     const options = { year: 'numeric', month: 'short', day: 'numeric' };
     const timeOptions = { hour: '2-digit', minute: '2-digit', hour12: true };
-    const formattedDate = new Date(date).toLocaleDateString(undefined, options);
-    const formattedTime = new Date(date).toLocaleTimeString(undefined, timeOptions);
-    return `${formattedTime} - ${formattedDate}`;
+    return `${d.toLocaleTimeString(undefined, timeOptions)} - ${d.toLocaleDateString(undefined, options)}`;
   };
 
   const handleCheckboxChange = (reportId) => {
@@ -99,14 +101,22 @@ const LatestReports = () => {
               onChange={() => handleCheckboxChange(report._id)}
               onClick={(e) => e.stopPropagation()}
             />
+
             <div onClick={() => handleReportClick(report._id)} className="report-main">
               <div className="report-title">{report.description}</div>
+
               <div className="report-meta">
                 <span>{report.district}, {report.sector}, {report.cell}</span>
                 <span className="report-type">{report.crimeType}</span>
               </div>
+
+
+
+              <div className="report-time">{formatDate(report.dateTime)}</div>
             </div>
-            <div className="report-time">{formatDate(report.dateTime)}</div>
+            {report.isAccepted && (
+                <div className="accepted-badge">Accepted</div>
+              )}
           </div>
         ))}
       </div>
