@@ -110,13 +110,13 @@ const LatestReports = () => {
                 <span className="report-type">{report.crimeType}</span>
                 <div className="report-time">{formatDate(report.dateTime)}</div>
               </div>
-
-
-
-
             </div>
+
             {report.isAccepted && (
-              <div className="accepted-badge">Accepted</div>
+              <div className="accepted-badge">
+                <span className='accepted-word'>Accepted</span>
+                {report.completed && <span className="solved-badge">Solved</span>}
+              </div>
             )}
           </div>
         ))}

@@ -21,15 +21,15 @@ const AcceptedReportDetail = () => {
     })
       .then(res => {
         if (res.ok) {
-          alert('Report marked as done!');
-          setReport(prev => ({ ...prev, isDone: true }));
+          alert('Report marked as completed!');
+          setReport(prev => ({ ...prev, completed: true })); // Change 'isDone' to 'completed'
         } else {
-          throw new Error('Failed to mark the report as done.');
+          throw new Error('Failed to mark the report as completed.');
         }
       })
       .catch(err => {
         console.error(err);
-        alert('An error occurred while marking the report as done.');
+        alert('An error occurred while marking the report as completed.');
       });
   };
 
@@ -43,8 +43,8 @@ const AcceptedReportDetail = () => {
       <div className="report-right">
         <div className="crime-header">
           <h1 className="crime-type">Crime: {report.crimeType}</h1>
-          <button className="done-button" onClick={handleDoneReport} disabled={report.isDone}>
-            {report.isDone ? 'Done' : 'Mark as Done'}
+          <button className="done-button" onClick={handleDoneReport} disabled={report.completed}>
+            {report.completed ? 'Solved' : 'Mark as Solved'} {/* Updated text from 'Done' to 'Solved' */}
           </button>
         </div>
 

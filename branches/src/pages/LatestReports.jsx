@@ -99,11 +99,13 @@ const LatestReports = () => {
                 <span className="report-type">{report.crimeType}</span>
                 <div className="report-time">{formatDate(report.dateTime)}</div>
               </div>
-            
             </div>
 
-            {/* Display 'Accepted' on the right if the report is accepted */}
-            {report.isAccepted && <span className="accepted-status">Accepted</span>}
+            {/* Display 'Accepted' or 'Solved' based on the report's status */}
+            <div className="status-tags">
+              {report.isAccepted && <span className="accepted-status">Accepted</span>}
+              {report.completed && <span className="solved-status">Solved</span>}
+            </div>
           </div>
         ))}
       </div>

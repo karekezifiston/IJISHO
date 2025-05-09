@@ -123,7 +123,7 @@ const AcceptedReports = () => {
                 </div>
               </div>
               <div className="report-time">{formatDate(report.dateTime)}</div>
-              {report.completed && <span className="completed-status">Done</span>}
+              {report.completed && <span className="completed-status">Solved</span>} {/* Changed from "Done" to "Solved" */}
             </div>
           ))
         )}

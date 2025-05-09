@@ -111,3 +111,12 @@
   font-weight: bold;
   margin-left: 12px; /* Ensure spacing between the date and Done label */
 }
+
+.solved-label {
+  background-color: #28a745;  /* Green color for solved */
+  color: white;
+  padding: 5px 10px;
+  border-radius: 12px;
+  font-weight: bold;
+  margin-left: 12px;
+}

@@ -171,6 +171,21 @@
     margin-left: auto;
     padding-top: 2px;
 }
+.accepted-status {
+    color: green;
+    font-weight: bold;
+  }
+  
+  .solved-status {
+    background-color: #136900;
+    padding: 7px 8px;
+    border-radius: 6px;
+    font-size: 12px;
+    color: #fff;
+    margin-left: 10px;
+    font-weight:bold;
+  }
+  
 
 /* Responsive: tablet */
 @media (max-width: 1097px) {

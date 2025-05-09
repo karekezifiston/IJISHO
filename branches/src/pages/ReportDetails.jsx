@@ -44,8 +44,16 @@ const ReportDetail = () => {
         <div className="crime-header">
           <h1 className="crime-type">Crime: {report.crimeType}</h1>
 
+          {/* Show "Accepted" and "Solved" if the report is accepted and completed */}
+          {report.isAccepted && report.completed && (
+            <div className="status-tags">
+              <span className="accepted-status">Accepted</span>
+              <span className="solved-status">Solved</span>
+            </div>
+          )}
+
           {report.completed ? (
-            <button className="done-button" disabled>✅ Done</button>
+            <button className="done-button" disabled>✅ solved</button>
           ) : (
             <button className="accept-button" onClick={handleAcceptReport}>Accept</button>
           )}

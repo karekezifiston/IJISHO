@@ -121,7 +121,7 @@ const AcceptedReports = () => {
               </div>
               <div className="report-right-section">
                 <div className="report-time">{formatDate(report.dateTime)}</div>
-                {report.completed && <span className="done-mark">Done</span>}
+                {report.completed && <span className="done-mark">Solved</span>}
               </div>
             </div>
           ))

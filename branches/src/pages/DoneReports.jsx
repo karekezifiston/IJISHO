@@ -94,7 +94,9 @@ const DoneReports = () => {
                     </div>
                   </div>
                   <div className="report-time">{formatDate(report.dateTime)}</div>
-                  <div className="done-label">Done</div>
+                  <div className="done-label">
+                    {report.completed ? 'Solved' : 'Done'} {/* Conditionally render "Solved" or "Done" */}
+                  </div>
                 </div>
               </Link>
             </div>

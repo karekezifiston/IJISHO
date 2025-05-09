@@ -170,6 +170,26 @@
 .accept-button:hover {
   background-color: #45a049;
 }
+.status-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.solved-label {
+  padding: 10px 16px;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 13px !important;
+  text-wrap: nowrap;
+  display: inline-block;
+  transition: background-color
+}
+
 
 /* Adjustments for mobile view */
 @media (max-width:988px) {
