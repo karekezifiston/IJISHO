@@ -17,23 +17,9 @@
   flex-direction: column;
   gap: 20px;
   width: 100%;
-  max-width: 90%;
   background-color: #1a1a1a;
   border-radius: 12px;
-  padding:12px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-  word-break: break-word;
-  overflow-wrap: anywhere;
-}
-.done-reports {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  width: 100%;
-  max-width: 90%;
-  background-color: #1a1a1a;
-  border-radius: 12px;
-  padding: 7px 10px;
+  padding: 12px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
   word-break: break-word;
   overflow-wrap: anywhere;
@@ -50,78 +36,46 @@
   box-shadow: 0 0 8px rgba(255, 77, 77, 0.2);
 }
 
-/* ✅ Delete button styling */
+/* ✅ Button styling */
+.delete-button, .decline-button, .complete-button {
+  padding: 8px 16px;
+  font-size: 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
 .delete-button {
   background-color: #e60707;
-  /* Green */
-  color: white;
-  border: none;
-  padding: 8px 16px;
-  font-size: 14px;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-  margin-left: 10px;
 }
 
-.delete-button:hover {
-  background-color: #950202;
-}
-
-.accept-button {
-  background-color: #4CAF50;
-  /* Green background */
-  color: white;
-  padding: 10px;
-  margin-left: 10px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.accept-button:hover {
-  background-color: #45a049d2;
-  /* Darker green */
-}
-
-
-/* ✅ Decline button styling */
 .decline-button {
   background-color: #decd12ad;
-  /* Red */
-  color: white;
-  border: none;
-  padding: 8px 16px;
-  font-size: 14px;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.decline-button:hover {
-  background-color: #decd1226;
 }
 
 .complete-button {
   background-color: #28a745;
   color: white;
   border: none;
-  padding: 8px 12px;
-  margin: 0 8px;
-  border-radius: 4px;
-  cursor: pointer;
+}
+
+.delete-button:hover {
+  background-color: #950202;
+}
+
+.decline-button:hover {
+  background-color: #decd1226;
 }
 
 .complete-button:hover {
   background-color: #218838;
 }
 
-
 /* ✅ Report item styling */
 .report-list-item {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
   padding: 13px 16px;
   width: 100%;
   margin-bottom: 12px;
@@ -153,10 +107,26 @@
   font-size: 12px;
   color: #777;
 }
+/* ✅ Green left border for completed reports */
+.report-list-item.completed {
+  border-left: 5px solid #00c8505a; /* Light green border */
+}
 
+
+/* ✅ Completed status styling */
+.completed-status {
+  background-color: #00c85030;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 12px;
+  font-weight: bold;
+  margin-right: 15px;
+  display: inline-block;
+}
+
+/* ✅ Custom styles for the toolbar */
 .uncomplete-button {
   background-color: #f5b342b5;
-  /* Change the background color */
   color: white;
   padding: 10px;
   margin-left: 10px;

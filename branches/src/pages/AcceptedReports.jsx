@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './AcceptedReports.css';
-import { useDistrict } from '../DistrictContext'; // ✅ import
+import { useDistrict } from '../DistrictContext';
 
 const AcceptedReports = () => {
   const [reports, setReports] = useState([]);
   const [selectedReports, setSelectedReports] = useState([]);
   const navigate = useNavigate();
-  const { district } = useDistrict(); // ✅ use selected district
+  const { district } = useDistrict();
 
   useEffect(() => {
     fetch('http://localhost:5000/api/accepted-reports')
@@ -16,7 +16,7 @@ const AcceptedReports = () => {
       .catch(err => console.error('Failed to fetch accepted reports:', err));
   }, []);
 
-  const filteredReports = reports.filter(report => report.district === district); // ✅ filter
+  const filteredReports = reports.filter(report => report.district === district);
 
   const handleReportClick = (reportId) => {
     navigate(`/accepted/${reportId}`);
@@ -108,7 +108,7 @@ const AcceptedReports = () => {
           filteredReports.map((report) => (
             <div
               key={report._id}
-              className={`report-list-item ${selectedReports.includes(report._id) ? 'selected' : ''}`}
+              className={`report-list-item ${selectedReports.includes(report._id) ? 'selected' : ''} ${report.completed ? 'completed' : ''}`}
             >
               <input
                 type="checkbox"
@@ -123,6 +123,7 @@ const AcceptedReports = () => {
                 </div>
               </div>
               <div className="report-time">{formatDate(report.dateTime)}</div>
+              {report.completed && <span className="completed-status">Done</span>}
             </div>
           ))
         )}

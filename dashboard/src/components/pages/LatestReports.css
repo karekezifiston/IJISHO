@@ -6,29 +6,30 @@
     min-height: 100vh;
     color: #eaeaea;
 }
+
 /* 🔁 Existing styles remain untouched */
 
 /* ✅ Checkbox and selection styling */
 .report-list-item input[type="checkbox"] {
     margin-right: 10px;
     transform: scale(1.2);
-    accent-color: #ff4d4d; /* Red checkbox */
+    accent-color: #ff4d4d;
+    /* Red checkbox */
     cursor: pointer;
 }
+
 .accepted-badge {
-    background-color: #e6f4ea;
-    color: #000000;
-    border-left: 4px solid #2e7d32;
-    padding: 4px 12px;
-    margin-top: 6px;
-    margin-bottom: 4px;
-    font-size: 13px;
-    font-weight: 700;
-    border-radius: 0 4px 4px 0;
-    width: fit-content;
+    font-size: 14px;
+    color: green;
+    font-weight: bold;
+    background-color: #e2f5e2;
+    padding: 4px 10px;
+    border-radius: 12px;
+    text-align: center;
     margin-left: auto;
-  }
-  
+    display: inline-block;
+}
+
 
 /* ✅ Highlight selected items */
 .report-list-item.selected {
@@ -76,12 +77,11 @@
 .latest-reports {
     display: flex;
     flex-direction: column;
-    gap:20px;
+    gap: 20px;
     width: 100%;
-    max-width: 90%;
     background-color: #1a1a1a;
     border-radius: 12px;
-    padding: 20px;
+    padding:12px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
 
     /* ✅ Fix overflow issue */

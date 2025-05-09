@@ -16,6 +16,24 @@
     cursor: pointer;
 }
 
+/* New class for the accepted report with green left border */
+.report-list-item.accepted {
+    border-left: 5px solid green;
+}
+
+/* Style for the "Accepted" status text */
+.accepted-status {
+    font-size: 14px;
+    color: green;
+    font-weight: bold;
+    background-color: #e2f5e2;
+    padding: 4px 10px;
+    border-radius: 12px;
+    text-align: center;
+    margin-left: auto;
+    display: inline-block;
+}
+
 /* ✅ Highlight selected items */
 .report-list-item.selected {
     background-color: #333;
@@ -63,7 +81,6 @@
     flex-direction: column;
     gap: 20px;
     width: 100%;
-    max-width: 90%;
     background-color: #1a1a1a;
     border-radius: 12px;
     padding:12px;
@@ -78,7 +95,7 @@
 .report-list-item {
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: flex-start;
     background-color: #222;
     border-radius: 10px;
     padding: 13px 16px;
@@ -182,5 +199,3 @@
         text-overflow: unset;
     }
 }
-
-

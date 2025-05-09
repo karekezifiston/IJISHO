@@ -1,0 +1,112 @@
+  .all-reports-container{
+    padding-top:4.5rem;
+  }
+  .reports-heading {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+  
+  .delete-toolbar {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 16px;
+  }
+  
+  .delete-button,
+  .uncomplete-button {
+    padding: 10px 16px;
+    border: none;
+    color: white;
+    font-size: 14px;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+  
+  .delete-button {
+    background-color: #dc3545;
+  }
+  
+  .uncomplete-button {
+    background-color: #ffc107;
+    color: black;
+  }
+  
+  .done-reports {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    background-color: #1a1a1a;
+    border-radius: 12px;
+    padding: 12px 10px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    word-break: break-word;
+    overflow-wrap: anywhere;
+  }
+  
+  .report-list-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    border-left: 4px solid #28a745;
+    background-color: #222;
+    padding: 12px;
+    border-radius: 6px;
+    position: relative;
+    width: 94% !important;
+  }
+  
+  .report-list-item input[type="checkbox"] {
+    margin-top: 8px;
+  }
+  
+  .report-link-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    gap: 12px;
+  }
+  
+  .report-main {
+    flex-grow: 1;
+  }
+  
+  .report-title {
+    font-weight: bold;
+    font-size: 16px;
+    margin-bottom: 4px;
+  }
+  
+  .report-meta {
+    font-size: 14px;
+    color: #555;
+    display: flex;
+    align-items: center;
+  }
+  
+  .report-type {
+    background-color: #3b3b3b;
+    padding: 2px 8px;
+    border-radius: 6px;
+    font-size: 12px;
+    color: #ddd;
+  }
+  
+  .report-time {
+    font-size: 13px;
+    color: #888;
+    margin-top: 4px;
+    display: inline-block;
+    flex-shrink: 0;
+  }
+  
+  .done-label {
+    background-color: #00c85030;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 12px;
+    font-weight: bold;
+    margin-left: 12px; /* Ensure spacing between the date and Done label */
+  }
+  

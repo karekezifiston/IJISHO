@@ -1,20 +1,23 @@
-.all-reports-container {
-  padding: 20px;
-  color: white;
+/* Checkbox styling */
+.report-list-item input[type="checkbox"] {
+  margin-right: 10px;
+  transform: scale(1.2);
+  accent-color: #ff4d4d;
+  cursor: pointer;
 }
 
-.reports-heading {
-  margin-bottom: 20px;
-  font-size: 24px;
+/* Highlight selected reports */
+.report-list-item.selected {
+  background-color: #333;
+  border: 1px solid ;
 }
 
-/* ✅ Container for reports */
+/* Layout container */
 .accepted-reports {
   display: flex;
   flex-direction: column;
   gap: 20px;
   width: 100%;
-  max-width: 90%;
   background-color: #1a1a1a;
   border-radius: 12px;
   padding: 12px;
@@ -23,27 +26,7 @@
   overflow-wrap: anywhere;
 }
 
-/* ✅ Checkbox style */
-.report-list-item input[type="checkbox"] {
-  margin-right: 10px;
-  transform: scale(1.2);
-  accent-color: #ff4d4d;
-  cursor: pointer;
-}
-
-/* ✅ Selected report styling */
-.report-list-item.selected {
-  background-color: #333;
-  border: 1px solid #2a2a2a;
-}
-
-/* ✅ Completed report styling */
-.report-list-item.completed {
-  /* background-color: #002b0081/; */
-  border-left: 5px solid #00c8505a;
-}
-
-/* ✅ Toolbar for actions */
+/* Action buttons toolbar */
 .delete-toolbar {
   display: flex;
   justify-content: flex-end;
@@ -54,40 +37,7 @@
   box-shadow: 0 0 8px rgba(255, 77, 77, 0.2);
 }
 
-/* ✅ Buttons */
-.decline-button {
-  background-color: #decd12ad;
-  color: white;
-  border: none;
-  padding: 8px 16px;
-  font-size: 14px;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.decline-button:hover {
-  background-color: #decd1226;
-}
-
-.complete-button {
-  background-color: #28a745;
-  color: white;
-  border: none;
-  padding: 8px 12px;
-  margin: 0 8px;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-.complete-button:hover {
-  background-color: #218838;
-}
-
-.delete-button {
-  background-color: #e60707;
-  color: white;
-  border: none;
+.delete-button, .decline-button, .complete-button {
   padding: 8px 16px;
   font-size: 14px;
   border-radius: 6px;
@@ -96,20 +46,44 @@
   margin-left: 10px;
 }
 
+.delete-button {
+  background-color: #e60707;
+}
+
+.decline-button {
+  background-color: #decd12ad;
+}
+
+.complete-button {
+  background-color: #28a745;
+  color: white;
+  border: none;
+}
+
 .delete-button:hover {
   background-color: #950202;
 }
 
-/* ✅ Report list item layout */
+.decline-button:hover {
+  background-color: #decd1226;
+}
+
+.complete-button:hover {
+  background-color: #218838;
+}
+
+/* Report item layout */
 .report-list-item {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
   padding: 13px 16px;
+  width: 100%;
   margin-bottom: 12px;
   border-radius: 8px;
   box-shadow: 0 0 6px rgba(0, 0, 0, 0.1);
   transition: background-color 0.3s ease;
+
 }
 
 .report-list-item:hover {
@@ -129,12 +103,13 @@
 .report-meta {
   font-size: 14px;
   color: #999;
-  display: flex;
-  justify-content: space-between;
 }
 
 .report-type {
-  margin-left: 12px;
+  display: block;
+  font-size: 13px;
+  margin-top: 4px;
+  color: #aaa;
 }
 
 .report-time {
@@ -142,8 +117,17 @@
   color: #777;
 }
 
-/* ✅ "Done" label styling */
-.done-label {
+/* Section to hold time and Done badge */
+/* Place "Done" and date on the same row */
+.report-right-section {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+
+/* "Done" label */
+.done-mark {
   background-color: #00c85030;
   color: white;
   padding: 5px 10px;
@@ -151,4 +135,9 @@
   font-weight: bold;
   margin-right: 15px;
   display: inline-block;
+}
+
+/* Green border for completed reports */
+.report-list-item.completed {
+  border-left: 5px solid #00c8505a;
 }

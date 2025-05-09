@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import './DoneReports.css'; // Make sure to import your CSS here
 
 const DoneReports = () => {
   const [reports, setReports] = useState([]);
@@ -38,8 +39,7 @@ const DoneReports = () => {
         method: 'PATCH',
       })
         .then((res) => res.json())
-        .then((data) => {
-          // Update the reports state after marking uncomplete
+        .then(() => {
           setReports((prevReports) =>
             prevReports.map((report) =>
               report._id === reportId ? { ...report, completed: false } : report
@@ -80,14 +80,17 @@ const DoneReports = () => {
                 to={`/report/${report._id}`}
                 style={{ textDecoration: 'none', color: 'inherit', flex: 1 }}
               >
-                <div className="report-main">
-                  <div className="report-title">{report.description}</div>
-                  <div className="report-meta">
-                    <span>{report.district}, {report.sector}, {report.cell}</span>
-                    <span className="report-type">{report.crimeType}</span>
+                <div className="report-link-content">
+                  <div className="report-main">
+                    <div className="report-title">{report.description}</div>
+                    <div className="report-meta">
+                      <span>{report.district}, {report.sector}, {report.cell}</span>
+                      <span className="report-type">{report.crimeType}</span>
+                    </div>
                   </div>
+                  <div className="report-time">{formatDate(report.dateTime)}</div>
+                  <div className="done-label">Done</div>
                 </div>
-                <div className="report-time">{formatDate(report.dateTime)}</div>
               </Link>
             </div>
           ))

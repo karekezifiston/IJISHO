@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { useDistrict } from '../DistrictContext'; // import context
+import { useDistrict } from '../DistrictContext'; 
+import './DoneReports.css';
 
 const DoneReports = () => {
   const [reports, setReports] = useState([]);
@@ -68,7 +69,7 @@ const DoneReports = () => {
 
       <div className="done-reports">
         {filteredReports.length === 0 ? (
-          <p>No done reports available for {district || 'this district'}.</p>
+          <p>No done reports available.</p>
         ) : (
           filteredReports.map((report) => (
             <div
@@ -84,14 +85,17 @@ const DoneReports = () => {
                 to={`/report/${report._id}`}
                 style={{ textDecoration: 'none', color: 'inherit', flex: 1 }}
               >
-                <div className="report-main">
-                  <div className="report-title">{report.description}</div>
-                  <div className="report-meta">
-                    <span>{report.district}, {report.sector}, {report.cell}</span>
-                    <span className="report-type">{report.crimeType}</span>
+                <div className="report-link-content">
+                  <div className="report-main">
+                    <div className="report-title">{report.description}</div>
+                    <div className="report-meta">
+                      <span>{report.district}, {report.sector}, {report.cell}</span>
+                      <span className="report-type">{report.crimeType}</span>
+                    </div>
                   </div>
+                  <div className="report-time">{formatDate(report.dateTime)}</div>
+                  <div className="done-label">Done</div>
                 </div>
-                <div className="report-time">{formatDate(report.dateTime)}</div>
               </Link>
             </div>
           ))

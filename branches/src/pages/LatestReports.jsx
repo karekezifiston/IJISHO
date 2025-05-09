@@ -83,7 +83,7 @@ const LatestReports = () => {
         {filteredReports.map((report) => (
           <div
             key={report._id}
-            className={`report-list-item ${selectedReports.includes(report._id) ? 'selected' : ''}`}
+            className={`report-list-item ${selectedReports.includes(report._id) ? 'selected' : ''} ${report.isAccepted ? 'accepted' : ''}`} // Add 'accepted' class conditionally
             onClick={() => handleReportClick(report._id)} // Entire container is clickable
           >
             <input
@@ -97,9 +97,13 @@ const LatestReports = () => {
               <div className="report-meta">
                 <span>{report.district}, {report.sector}, {report.cell}</span>
                 <span className="report-type">{report.crimeType}</span>
+                <div className="report-time">{formatDate(report.dateTime)}</div>
               </div>
-              <div className="report-time">{formatDate(report.dateTime)}</div>
+            
             </div>
+
+            {/* Display 'Accepted' on the right if the report is accepted */}
+            {report.isAccepted && <span className="accepted-status">Accepted</span>}
           </div>
         ))}
       </div>

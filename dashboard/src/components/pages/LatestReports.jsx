@@ -108,15 +108,16 @@ const LatestReports = () => {
               <div className="report-meta">
                 <span>{report.district}, {report.sector}, {report.cell}</span>
                 <span className="report-type">{report.crimeType}</span>
+                <div className="report-time">{formatDate(report.dateTime)}</div>
               </div>
 
 
 
-              <div className="report-time">{formatDate(report.dateTime)}</div>
+
             </div>
             {report.isAccepted && (
-                <div className="accepted-badge">Accepted</div>
-              )}
+              <div className="accepted-badge">Accepted</div>
+            )}
           </div>
         ))}
       </div>

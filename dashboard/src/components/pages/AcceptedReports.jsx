@@ -54,7 +54,11 @@ const AcceptedReports = () => {
         });
       }
 
-      const updatedReports = reports.filter((report) => !selectedReports.includes(report._id));
+      const updatedReports = reports.map((report) =>
+        selectedReports.includes(report._id)
+          ? { ...report, isAccepted: false }
+          : report
+      );
       setReports(updatedReports);
       setSelectedReports([]);
     } catch (error) {
@@ -103,7 +107,6 @@ const AcceptedReports = () => {
               key={report._id}
               className={`report-list-item ${selectedReports.includes(report._id) ? 'selected' : ''} ${report.completed ? 'completed' : ''}`}
             >
-             
               <input
                 type="checkbox"
                 checked={selectedReports.includes(report._id)}
@@ -116,8 +119,10 @@ const AcceptedReports = () => {
                   <span className="report-type">{report.crimeType}</span>
                 </div>
               </div>
-              <div className="report-time">{formatDate(report.dateTime)}</div>
-              {report.completed && <span className="done-label">Done</span>}
+              <div className="report-right-section">
+                <div className="report-time">{formatDate(report.dateTime)}</div>
+                {report.completed && <span className="done-mark">Done</span>}
+              </div>
             </div>
           ))
         )}
