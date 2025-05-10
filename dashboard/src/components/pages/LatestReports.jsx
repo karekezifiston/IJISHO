@@ -112,11 +112,9 @@ const LatestReports = () => {
               </div>
             </div>
 
-            {report.isAccepted && (
-              <div className="accepted-badge">
-                <span className='accepted-word'>Accepted</span>
-                {report.completed && <span className="solved-badge">Solved</span>}
-              </div>
+            {/* ✅ Only show "Solved" if it's accepted AND completed */}
+            {report.isAccepted && report.completed && (
+              <div className="solved-badge">Solved</div>
             )}
           </div>
         ))}

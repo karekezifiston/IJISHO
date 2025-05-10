@@ -4,7 +4,7 @@ import { useDistrict } from '../DistrictContext';
 import './LatestReports.css';
 
 const LatestReports = () => {
-  const { district, filteredReports } = useDistrict(); // Access the selected district
+  const { district, filteredReports } = useDistrict();
   const [selectedReports, setSelectedReports] = React.useState([]);
   const navigate = useNavigate();
 
@@ -83,14 +83,14 @@ const LatestReports = () => {
         {filteredReports.map((report) => (
           <div
             key={report._id}
-            className={`report-list-item ${selectedReports.includes(report._id) ? 'selected' : ''} ${report.isAccepted ? 'accepted' : ''}`} // Add 'accepted' class conditionally
-            onClick={() => handleReportClick(report._id)} // Entire container is clickable
+            className={`report-list-item ${selectedReports.includes(report._id) ? 'selected' : ''}`}
+            onClick={() => handleReportClick(report._id)}
           >
             <input
               type="checkbox"
               checked={selectedReports.includes(report._id)}
               onChange={() => handleCheckboxChange(report._id)}
-              onClick={(e) => e.stopPropagation()} // Prevent navigation when clicking checkbox
+              onClick={(e) => e.stopPropagation()}
             />
             <div className="report-main">
               <div className="report-title">{report.description}</div>
@@ -101,11 +101,10 @@ const LatestReports = () => {
               </div>
             </div>
 
-            {/* Display 'Accepted' or 'Solved' based on the report's status */}
-            <div className="status-tags">
-              {report.isAccepted && <span className="accepted-status">Accepted</span>}
-              {report.completed && <span className="solved-status">Solved</span>}
-            </div>
+            {/* ✅ Only show "Solved" if it's accepted AND completed */}
+            {report.isAccepted && report.completed && (
+              <div className="solved-badge">Solved</div>
+            )}
           </div>
         ))}
       </div>
