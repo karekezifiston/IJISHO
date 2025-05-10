@@ -42,7 +42,7 @@ const LatestReports = () => {
     }
 
     setSelectedReports([]);
-    window.location.reload(); // Refresh to see updated data
+    window.location.reload();
   };
 
   const handleAccept = async () => {
@@ -80,33 +80,37 @@ const LatestReports = () => {
       )}
 
       <div className="latest-reports">
-        {filteredReports.map((report) => (
-          <div
-            key={report._id}
-            className={`report-list-item ${selectedReports.includes(report._id) ? 'selected' : ''}`}
-            onClick={() => handleReportClick(report._id)}
-          >
-            <input
-              type="checkbox"
-              checked={selectedReports.includes(report._id)}
-              onChange={() => handleCheckboxChange(report._id)}
-              onClick={(e) => e.stopPropagation()}
-            />
-            <div className="report-main">
-              <div className="report-title">{report.description}</div>
-              <div className="report-meta">
-                <span>{report.district}, {report.sector}, {report.cell}</span>
-                <span className="report-type">{report.crimeType}</span>
-                <div className="report-time">{formatDate(report.dateTime)}</div>
-              </div>
-            </div>
+        {filteredReports.map((report) => {
+          const isSelected = selectedReports.includes(report._id);
+          const isAccepted = report.isAccepted;
 
-            {/* ✅ Only show "Solved" if it's accepted AND completed */}
-            {report.isAccepted && report.completed && (
-              <div className="solved-badge">Solved</div>
-            )}
-          </div>
-        ))}
+          return (
+            <div
+              key={report._id}
+              className={`report-list-item ${isSelected ? 'selected' : ''} ${isAccepted ? 'accepted' : ''}`}
+              onClick={() => handleReportClick(report._id)}
+            >
+              <input
+                type="checkbox"
+                checked={isSelected}
+                onChange={() => handleCheckboxChange(report._id)}
+                onClick={(e) => e.stopPropagation()}
+              />
+              <div className="report-main">
+                <div className="report-title">{report.description}</div>
+                <div className="report-meta">
+                  <span>{report.district}, {report.sector}, {report.cell}</span>
+                  <span className="report-type">{report.crimeType}</span>
+                  <div className="report-time">{formatDate(report.dateTime)}</div>
+                </div>
+              </div>
+
+              {report.isAccepted && report.completed && (
+                <div className="solved-badge">Solved</div>
+              )}
+            </div>
+          );
+        })}
       </div>
     </div>
   );

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react'; 
 import { useNavigate } from 'react-router-dom';
 import './LatestReports.css';
 
@@ -93,7 +93,7 @@ const LatestReports = () => {
         {reports.map((report) => (
           <div
             key={report._id}
-            className={`report-list-item ${selectedReports.includes(report._id) ? 'selected' : ''}`}
+            className={`report-list-item ${selectedReports.includes(report._id) ? 'selected' : ''} ${report.isAccepted ? 'accepted' : ''}`}
           >
             <input
               type="checkbox"
@@ -112,8 +112,8 @@ const LatestReports = () => {
               </div>
             </div>
 
-            {/* ✅ Only show "Solved" if it's accepted AND completed */}
-            {report.isAccepted && report.completed && (
+            {/* ✅ Show Solved if completed is true, regardless of isAccepted */}
+            {report.completed && (
               <div className="solved-badge">Solved</div>
             )}
           </div>

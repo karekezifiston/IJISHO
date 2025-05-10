@@ -43,15 +43,14 @@ const ReportDetail = () => {
       <div className="report-right">
         <div className="crime-header">
           <h1 className="crime-type">Crime: {report.crimeType}</h1>
-
-          {report.isAccepted ? (
-            <div className="status-wrapper">
-              <button className="done-button" disabled> Accepted</button>
-              {report.completed && <span className="solved-label">✅ Solved</span>}
-            </div>
-          ) : (
-            <button className="accept-button" onClick={handleAcceptReport}>Accept</button>
-          )}
+          <div className="status-wrapper">
+            {report.isAccepted ? (
+              <button className="done-button" disabled>Accepted</button>
+            ) : (
+              <button className="accept-button" onClick={handleAcceptReport}>Accept</button>
+            )}
+            {report.completed && <span className="solved-label">✅ Solved</span>}
+          </div>
         </div>
 
         <div className="report-header">

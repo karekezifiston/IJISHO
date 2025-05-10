@@ -18,7 +18,24 @@ const DoneReportDetail = () => {
   const handleImageClick = () => setIsFullScreen(true);
   const handleCloseFullScreen = () => setIsFullScreen(false);
 
+  const isDescriptionComplete = (description) => {
+    // Check if the description contains a minimum number of words or specific keywords
+    return description.split(" ").length >= 5; // Example: Description must have at least 5 words
+  };
+
+  const cleanDescription = (description) => {
+    // Remove words like 'incomplete' or 'draft', or you can apply other logic
+    return description.replace(/\bincomplete\b|\bdraft\b/g, '').trim();
+  };
+
   if (!report) return <div>Loading...</div>;
+
+  let description = report.description;
+
+  // Check if the description is complete, otherwise clean it
+  if (!isDescriptionComplete(description)) {
+    description = cleanDescription(description);
+  }
 
   return (
     <div className="report-detail-container">
@@ -41,7 +58,7 @@ const DoneReportDetail = () => {
 
         <div className="report-description">
           <h4>Description:</h4>
-          <p>{report.description}</p>
+          <p>{description}</p>
         </div>
 
         <div className="contact-info">

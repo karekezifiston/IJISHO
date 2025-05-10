@@ -49,6 +49,10 @@
     color: #fff;
     margin-left:10px;
 }
+/* Apply green left border when report is accepted or completed */
+.report-list-item.accepted {
+    border-left: 5px solid #136900; /* Green left border */
+  }
 
 
 /* ✅ Highlight selected items */
