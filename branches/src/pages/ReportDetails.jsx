@@ -44,10 +44,16 @@ const ReportDetail = () => {
         <div className="crime-header">
           <h1 className="crime-type">Crime: {report.crimeType}</h1>
 
-          {/* Show "Accepted" and "Solved" if the report is accepted and completed */}
-          {report.isAccepted && report.completed && (
+          {/* Show "Accepted" only if the report is not accepted yet */}
+          {!report.isAccepted && !report.completed && (
             <div className="status-tags">
               <span className="accepted-status">Accepted</span>
+            </div>
+          )}
+
+          {/* Show "Solved" only if the report is completed and accepted */}
+          {report.isAccepted && report.completed && (
+            <div className="status-tags">
               <span className="solved-status">Solved</span>
             </div>
           )}
