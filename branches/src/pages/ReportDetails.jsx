@@ -44,29 +44,35 @@ const ReportDetail = () => {
         <div className="crime-header">
           <h1 className="crime-type">Crime: {report.crimeType}</h1>
 
-          {/* Show "Accepted" only if the report is not accepted yet */}
-          {!report.isAccepted && !report.completed && (
-            <div className="status-tags">
-              <span className="accepted-status">Accepted</span>
-            </div>
-          )}
+          <div className="status-wrapper">
+            {/* Show "Accept" button if report is not accepted */}
+            {!report.isAccepted && !report.completed && (
+              <button className="accept-button" onClick={handleAcceptReport}>
+                Accept
+              </button>
+            )}
 
-          {/* Show "Solved" only if the report is completed and accepted */}
-          {report.isAccepted && report.completed && (
-            <div className="status-tags">
-              <span className="solved-status">Solved</span>
-            </div>
-          )}
+            {/* Show "Accepted" if report is accepted but not yet completed */}
+            {report.isAccepted && !report.completed && (
+              <button className="done-button" disabled>
+                Accepted
+              </button>
+            )}
 
-          {report.completed ? (
-            <button className="done-button" disabled>✅ solved</button>
-          ) : (
-            <button className="accept-button" onClick={handleAcceptReport}>Accept</button>
-          )}
+            {/* Show "Solved" if report is completed */}
+            {report.completed && (
+              <button className="done-button" disabled>
+                ✅ Solved
+              </button>
+            )}
+          </div>
+
         </div>
 
         <div className="report-header">
-          <p className="report-date">{new Date(report.dateTime.$date).toLocaleString()}</p>
+          <p className="report-date">
+            {new Date(report.dateTime.$date).toLocaleString()}
+          </p>
         </div>
 
         <div className="location-container">
