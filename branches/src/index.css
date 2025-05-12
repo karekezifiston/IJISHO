@@ -85,9 +85,9 @@ body {
 .district-selection select{
   padding:0.5rem 1rem;
   border-radius:0.5rem;
-  border:1px soldid #ccc;
-  background-color:#ffffff;
-  color:#000;
+  border:1px soldid #2221214c;
+  background-color:#0d0d0d;
+  color:#dededea9;
   font-size:1rem;
   font-weight:500;
   width:100%;
