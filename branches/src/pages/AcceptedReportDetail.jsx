@@ -22,7 +22,7 @@ const AcceptedReportDetail = () => {
       .then(res => {
         if (res.ok) {
           alert('Report marked as completed!');
-          setReport(prev => ({ ...prev, completed: true })); // Change 'isDone' to 'completed'
+          setReport(prev => ({ ...prev, completed: true }));
         } else {
           throw new Error('Failed to mark the report as completed.');
         }
@@ -44,7 +44,7 @@ const AcceptedReportDetail = () => {
         <div className="crime-header">
           <h1 className="crime-type">Crime: {report.crimeType}</h1>
           <button className="done-button" onClick={handleDoneReport} disabled={report.completed}>
-            {report.completed ? 'Solved' : 'Mark as Solved'} {/* Updated text from 'Done' to 'Solved' */}
+            {report.completed ? 'Solved' : 'Mark as Solved'}
           </button>
         </div>
 
@@ -54,9 +54,10 @@ const AcceptedReportDetail = () => {
 
         <div className="location-container">
           <h4>Location</h4>
+          <p><strong>Province:</strong> {report.province}</p>  {/* Added province */}
           <p><strong>District:</strong> {report.district}</p>
           <p><strong>Sector:</strong> {report.sector}</p>
-          <p><strong>Cell:</strong> {report.cell}</p>
+          {/* Removed Cell */}
         </div>
 
         <div className="report-description">

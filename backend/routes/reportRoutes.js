@@ -46,9 +46,9 @@ router.post('/report', upload.fields([
   { name: 'audio', maxCount: 1 },
 ]), async (req, res) => {
   try {
-    const { description, district, sector, cell, crimeType, dateTime, contact } = req.body;
+    const { description, province, district, sector, crimeType, dateTime, contact } = req.body;
 
-    if (!description || !district || !sector || !cell || !crimeType || !dateTime || !contact) {
+    if (!description || !province || !district || !sector || !crimeType || !dateTime || !contact) {
       return res.status(400).json({ error: 'All fields are required except media and audio.' });
     }
 
@@ -57,9 +57,9 @@ router.post('/report', upload.fields([
 
     const report = new Report({
       description,
+      province,
       district,
       sector,
-      cell,
       crimeType,
       dateTime,
       contact,

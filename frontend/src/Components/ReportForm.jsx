@@ -4,16 +4,40 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMicrophone, faStop, faHandshake } from '@fortawesome/free-solid-svg-icons';
 import { useTranslation } from 'react-i18next';
 
+const locationData = {
+  Kigali: {
+    Gasabo: ["Remera", "Kimironko", "Kacyiru"],
+    Kicukiro: ["Gikondo", "Nyarugunga", "Kanombe"],
+    Nyarugenge: ["Nyamirambo", "Kigali", "Rwezamenyo"]
+  },
+  Northern: {
+    Musanze: ["Muhoza", "Cyuve", "Kinigi"],
+    Gakenke: ["Gakenke", "Mataba", "Rushashi"]
+  },
+  Southern: {
+    Huye: ["Ngoma", "Tumba", "Kigoma"],
+    Nyanza: ["Busasamana", "Kibirizi", "Mukingo"]
+  },
+  Western: {
+    Rubavu: ["Gisenyi", "Nyundo", "Kanama"],
+    Rusizi: ["Kamembe", "Mururu", "Gihundwe"]
+  },
+  Eastern: {
+    Rwamagana: ["Kigabiro", "Nzige", "Karenge"],
+    Nyagatare: ["Rukomo", "Gatunda", "Karama"]
+  }
+};
+
 const ReportForm = () => {
   const { t } = useTranslation();
 
   const [formData, setFormData] = useState({
-    description: '',
+    province: '',
     district: '',
     sector: '',
-    cell: '',
     crimeType: '',
     dateTime: '',
+    description: '',
     media: null,
     audio: null,
     contact: ''
@@ -31,27 +55,61 @@ const ReportForm = () => {
     }));
   };
 
+  const handleProvinceChange = (e) => {
+    const province = e.target.value;
+    setFormData(prev => ({
+      ...prev,
+      province,
+      district: '',
+      sector: ''
+    }));
+  };
+
+  const handleDistrictChange = (e) => {
+    const district = e.target.value;
+    setFormData(prev => ({
+      ...prev,
+      district,
+      sector: ''
+    }));
+  };
+
+  const handleSectorChange = (e) => {
+    const sector = e.target.value;
+    setFormData(prev => ({
+      ...prev,
+      sector
+    }));
+  };
+
   const handleStartRecording = async () => {
-    const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-    mediaRecorderRef.current = new MediaRecorder(stream);
-    audioChunksRef.current = [];
+    try {
+      const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+      mediaRecorderRef.current = new MediaRecorder(stream);
+      audioChunksRef.current = [];
 
-    mediaRecorderRef.current.ondataavailable = (e) => {
-      audioChunksRef.current.push(e.data);
-    };
+      mediaRecorderRef.current.ondataavailable = (e) => {
+        audioChunksRef.current.push(e.data);
+      };
 
-    mediaRecorderRef.current.onstop = () => {
-      const audioBlob = new Blob(audioChunksRef.current, { type: 'audio/webm' });
-      setFormData(prev => ({ ...prev, audio: audioBlob }));
-    };
+      mediaRecorderRef.current.onstop = () => {
+        const audioBlob = new Blob(audioChunksRef.current, { type: 'audio/webm' });
+        setFormData(prev => ({ ...prev, audio: audioBlob }));
+      };
 
-    mediaRecorderRef.current.start();
-    setRecording(true);
+      mediaRecorderRef.current.start();
+      setRecording(true);
+    } catch (error) {
+      alert(t("audio_permission_error"));
+      console.error("Audio recording error:", error);
+    }
   };
 
   const handleStopRecording = () => {
-    mediaRecorderRef.current.stop();
-    setRecording(false);
+    if (mediaRecorderRef.current) {
+      mediaRecorderRef.current.stop();
+      setRecording(false);
+    }
   };
 
   const handleSubmit = async (e) => {
@@ -63,22 +121,18 @@ const ReportForm = () => {
     }
 
     const formDataToSend = new FormData();
-
-    // Append text data first
-    formDataToSend.append('description', formData.description);
+    formDataToSend.append('province', formData.province);
     formDataToSend.append('district', formData.district);
     formDataToSend.append('sector', formData.sector);
-    formDataToSend.append('cell', formData.cell);
     formDataToSend.append('crimeType', formData.crimeType);
     formDataToSend.append('dateTime', formData.dateTime);
+    formDataToSend.append('description', formData.description);
     formDataToSend.append('contact', formData.contact);
 
-    // Append media file (if exists)
     if (formData.media) {
       formDataToSend.append('media', formData.media);
     }
 
-    // Append audio (if exists)
     if (formData.audio) {
       formDataToSend.append('audio', formData.audio);
     }
@@ -91,15 +145,13 @@ const ReportForm = () => {
 
       if (response.ok) {
         alert(t("report_success"));
-
-        // Reset form
         setFormData({
-          description: '',
+          province: '',
           district: '',
           sector: '',
-          cell: '',
           crimeType: '',
           dateTime: '',
+          description: '',
           media: null,
           audio: null,
           contact: ''
@@ -113,6 +165,9 @@ const ReportForm = () => {
     }
   };
 
+  const availableDistricts = formData.province ? Object.keys(locationData[formData.province]) : [];
+  const availableSectors = formData.district ? locationData[formData.province][formData.district] : [];
+
   return (
     <form onSubmit={handleSubmit} className="report-form">
       <h2>
@@ -120,14 +175,31 @@ const ReportForm = () => {
         <FontAwesomeIcon icon={faHandshake} style={{ color: '#ffffffd6' }} size="lg" />
       </h2>
 
-      <label>{t("district")}</label>
-      <input name="district" value={formData.district} onChange={handleChange} required />
+      <div className='all-drop-down'>
+        <label>{t("province")}</label>
+        <select name="province" value={formData.province} onChange={handleProvinceChange} required>
+          <option value="">{t("select_province")}</option>
+          {Object.keys(locationData).map(province => (
+            <option key={province} value={province}>{province}</option>
+          ))}
+        </select>
 
-      <label>{t("sector")}</label>
-      <input name="sector" value={formData.sector} onChange={handleChange} required />
+        <label>{t("district")}</label>
+        <select name="district" value={formData.district} onChange={handleDistrictChange} required disabled={!formData.province}>
+          <option value="">{t("select_district")}</option>
+          {availableDistricts.map(district => (
+            <option key={district} value={district}>{district}</option>
+          ))}
+        </select>
 
-      <label>{t("cell")}</label>
-      <input name="cell" value={formData.cell} onChange={handleChange} required />
+        <label>{t("sector")}</label>
+        <select name="sector" value={formData.sector} onChange={handleSectorChange} required disabled={!formData.district}>
+          <option value="">{t("select_sector")}</option>
+          {availableSectors.map(sector => (
+            <option key={sector} value={sector}>{sector}</option>
+          ))}
+        </select>
+      </div>
 
       <div className='crimeType'>
         <label>{t("crime_type")}</label>
@@ -142,7 +214,13 @@ const ReportForm = () => {
       </div>
 
       <label>{t("date")}</label>
-      <input type="datetime-local" name="dateTime" value={formData.dateTime} onChange={handleChange} required />
+      <input
+        type="datetime-local"
+        name="dateTime"
+        value={formData.dateTime}
+        onChange={handleChange}
+        required
+      />
 
       <label>{t("media")}</label>
       <input type="file" name="media" onChange={handleChange} />
@@ -159,7 +237,7 @@ const ReportForm = () => {
         <label>{t("record_audio")}</label>
         {recording ? (
           <button type="button" className="whatsapp-button stop" onClick={handleStopRecording}>
-            Stop
+            <FontAwesomeIcon icon={faStop} />
           </button>
         ) : (
           <button type="button" className="whatsapp-button record" onClick={handleStartRecording}>

@@ -45,28 +45,24 @@ const ReportDetail = () => {
           <h1 className="crime-type">Crime: {report.crimeType}</h1>
 
           <div className="status-wrapper">
-            {/* Show "Accept" button if report is not accepted */}
             {!report.isAccepted && !report.completed && (
               <button className="accept-button" onClick={handleAcceptReport}>
                 Accept
               </button>
             )}
 
-            {/* Show "Accepted" if report is accepted but not yet completed */}
             {report.isAccepted && !report.completed && (
               <button className="done-button" disabled>
                 Accepted
               </button>
             )}
 
-            {/* Show "Solved" if report is completed */}
             {report.completed && (
               <button className="done-button" disabled>
                 ✅ Solved
               </button>
             )}
           </div>
-
         </div>
 
         <div className="report-header">
@@ -77,9 +73,9 @@ const ReportDetail = () => {
 
         <div className="location-container">
           <h4>Location</h4>
+           <p><strong>Province:</strong> {report.province}</p> {/* Changed here */}
           <p><strong>District:</strong> {report.district}</p>
           <p><strong>Sector:</strong> {report.sector}</p>
-          <p><strong>Cell:</strong> {report.cell}</p>
         </div>
 
         <div className="report-description">

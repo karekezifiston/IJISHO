@@ -118,12 +118,12 @@ const AcceptedReports = () => {
               <div className="report-main" onClick={() => handleReportClick(report._id)}>
                 <div className="report-title">{report.description}</div>
                 <div className="report-meta">
-                  <span>{report.district}, {report.sector}, {report.cell}</span>
+                  <span>{report.district}, {report.sector}, {report.province}</span>
                   <span className="report-type">{report.crimeType}</span>
                 </div>
               </div>
               <div className="report-time">{formatDate(report.dateTime)}</div>
-              {report.completed && <span className="completed-status">Solved</span>} {/* Changed from "Done" to "Solved" */}
+              {report.completed && <span className="completed-status">Solved</span>}
             </div>
           ))
         )}

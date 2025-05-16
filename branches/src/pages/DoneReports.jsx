@@ -41,7 +41,7 @@ const DoneReports = () => {
         method: 'PATCH',
       })
         .then((res) => res.json())
-        .then((data) => {
+        .then(() => {
           setReports((prevReports) =>
             prevReports.map((report) =>
               report._id === reportId ? { ...report, completed: false } : report
@@ -89,13 +89,14 @@ const DoneReports = () => {
                   <div className="report-main">
                     <div className="report-title">{report.description}</div>
                     <div className="report-meta">
-                      <span>{report.district}, {report.sector}, {report.cell}</span>
+                      {/* Replaced cell with province here */}
+                      <span>{report.province}, {report.district}, {report.sector}</span>
                       <span className="report-type">{report.crimeType}</span>
                     </div>
                   </div>
                   <div className="report-time">{formatDate(report.dateTime)}</div>
                   <div className="done-label">
-                    {report.completed ? 'Solved' : 'Done'} {/* Conditionally render "Solved" or "Done" */}
+                    {report.completed ? 'Solved' : 'Done'}
                   </div>
                 </div>
               </Link>

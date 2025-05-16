@@ -58,9 +58,9 @@ const AcceptedReportDetail = () => {
 
         <div className="location-container">
           <h4>Location</h4>
+            <p><strong>Province:</strong> {report.province}</p> {/* changed here */}
           <p><strong>District:</strong> {report.district}</p>
           <p><strong>Sector:</strong> {report.sector}</p>
-          <p><strong>Cell:</strong> {report.cell}</p>
         </div>
 
         <div className="report-description">

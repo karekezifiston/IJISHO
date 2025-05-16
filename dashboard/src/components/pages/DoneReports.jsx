@@ -84,7 +84,7 @@ const DoneReports = () => {
                   <div className="report-main">
                     <div className="report-title">{report.description}</div>
                     <div className="report-meta">
-                      <span>{report.district}, {report.sector}, {report.cell}</span>
+                      <span>{report.province}, {report.district}, {report.sector}</span> {/* changed here */}
                       <span className="report-type">{report.crimeType}</span>
                     </div>
                   </div>

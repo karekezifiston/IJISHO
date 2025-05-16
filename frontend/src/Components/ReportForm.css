@@ -1,146 +1,197 @@
-.report-form {
-  margin: auto;
-  padding: 20px;
-  background: #080808;
-  border-radius: 10px;
-  width: 80%;
-}
+ .report-form {
+   margin: auto;
+   padding: 20px;
+   background: #080808;
+   border-radius: 10px;
+   width: 80%;
+ }
 
-.report-form h2 {
-  text-align: center;
-  font-size: 30px;
-  font-weight: 800;
-  text-transform: uppercase;
-  color: #ffffffd6;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding-bottom:25px;
-  gap: 20px;
-}
+ .report-form h2 {
+   text-align: center;
+   font-size: 30px;
+   font-weight: 800;
+   text-transform: uppercase;
+   color: #ffffffd6;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   padding-bottom: 25px;
+   gap: 20px;
+ }
 
-.report-form input,
-.report-form textarea {
-  width: 100%;
-  margin-bottom: 25px;
-  margin-top: 7px;
-  padding: 15px;
-  border: none;
-  background-color: #2e2e2e86;
-  border-radius: 4px;
-}
+ .all-drop-down {
+   display: flex;
+   flex-direction: column;
+   gap: 30px;
+   padding-bottom: 1rem;
+ }
 
-label {
-  font-weight: 400;
-  padding-right: 10px;
-  color: rgba(229, 229, 229, 0.781);
-}
-.crimeType{
-  width:100%;
-  padding-bottom:35px;
-}
-.audio-controls {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
+ .all-drop-down select {
+   background-color: #2e2e2e86;
+   border: none;
+   height: 50px;
+   font-weight: 600;
+   color: rgba(229, 229, 229, 0.781);
+   appearance: none;
+   padding:15px;
+   /* Removes default arrow and styles */
+   -webkit-appearance: none;
+   /* Safari/Chrome */
+   -moz-appearance: none;
+ }
 
-.whatsapp-button {
-  border: none;
-  padding: 12px;
-  border-radius: 50%;
-  cursor: pointer;
-  font-size: 18px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
-  color: white;
-  transition: all 0.3s ease;
-  height: 40px;
-  width:70px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
+ /* Optional: Add a custom arrow (optional aesthetic) */
+ .all-drop-down select {
+   background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20fill='%23ccc'%20viewBox='0%200%2024%2024'%20xmlns='http://www.w3.org/2000/svg'%3E%3Cpath%20d='M7%2010l5%205%205-5z'/%3E%3C/svg%3E");
+   background-repeat: no-repeat;
+   background-position: right 10px center;
+   background-size: 16px 16px;
+ }
 
-.whatsapp-button.record {
-  /* background-color:transparent; */
-  border:solid 1px rgba(255, 255, 255, 0.279);
-}
+ /* Style the <option> background (some browsers support this) */
+ .all-drop-down select option {
+   background-color: #1f1f1f;
+   /* dark gray option background */
+   color: rgba(229, 229, 229, 0.9);
+ }
 
-.whatsapp-button.stop {
-  background-color:red;
-  border:none;
-}
+ .all-drop-down select:focus {
+   outline: none;
 
-.whatsapp-button:hover {
-  opacity: 0.9;
-  transform: scale(1.05);
-}
+ }
+
+ .all-drop-down select option:checked,
+ .all-drop-down select option:hover {
+   background-color: #3a3a3a;
+   /* darker on hover/select */
+   color: white;
+ }
+
+ .report-form input,
+ .report-form textarea {
+   width: 100%;
+   margin-bottom: 25px;
+   margin-top: 7px;
+   padding: 15px;
+   border: none;
+   background-color: #2e2e2e86;
+   border-radius: 4px;
+ }
+
+ label {
+   font-weight: 400;
+   padding-right: 10px;
+   color: rgba(229, 229, 229, 0.781);
+ }
+
+ .crimeType {
+   width: 100%;
+   padding-bottom: 35px;
+ }
+
+ .audio-controls {
+   display: flex;
+   flex-direction: column;
+   gap: 10px;
+ }
+
+ .whatsapp-button {
+   border: none;
+   padding: 12px;
+   border-radius: 50%;
+   cursor: pointer;
+   font-size: 18px;
+   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+   color: white;
+   transition: all 0.3s ease;
+   height: 40px;
+   width: 70px;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+ }
+
+ .whatsapp-button.record {
+   /* background-color:transparent; */
+   border: solid 1px rgba(255, 255, 255, 0.279);
+ }
+
+ .whatsapp-button.stop {
+   background-color: red;
+   border: none;
+ }
+
+ .whatsapp-button:hover {
+   opacity: 0.9;
+   transform: scale(1.05);
+ }
 
 
-.report-form button {
-  margin-bottom: 15px;
-  padding-left: 10px;
-  padding-right:10px;
-  border-radius: 6px;
-  border: 1px solid #ccc;
-}
-.report-form button {
-  color: rgba(255, 255, 255, 0.831);
-  border: none;
-  font-weight:700;
-  cursor: pointer;
-}
+ .report-form button {
+   margin-bottom: 15px;
+   padding-left: 10px;
+   padding-right: 10px;
+   border-radius: 6px;
+   border: 1px solid #ccc;
+ }
 
-.report-form button:hover {
-  background-color: #cccccc18;
-}
+ .report-form button {
+   color: rgba(255, 255, 255, 0.831);
+   border: none;
+   font-weight: 700;
+   cursor: pointer;
+ }
 
-@media(max-width:1051px) {
-  .report-form {
-    width: 100%;
-  }
+ .report-form button:hover {
+   background-color: #cccccc18;
+ }
 
-  .report-form h2 {
-    text-align: center;
-    font-size: 20px;
-    font-weight: 800;
-    text-transform: uppercase;
-    color: #ffffffd6;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 20px;
-    padding-bottom: 20px;
-  }
+ @media(max-width:1051px) {
+   .report-form {
+     width: 100%;
+   }
 
-  label {
-    font-size: 15px;
-  }
+   .report-form h2 {
+     text-align: center;
+     font-size: 20px;
+     font-weight: 800;
+     text-transform: uppercase;
+     color: #ffffffd6;
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     gap: 20px;
+     padding-bottom: 20px;
+   }
 
-  .button {
-    font-size: 14px;
-  }
-}
+   label {
+     font-size: 15px;
+   }
 
-@media(max-width:505px) {
-  .report-form h2 {
-    font-size: 15px;
-    gap: 5px;
-    flex-direction: column;
-    padding-bottom:5px;
-  }
+   .button {
+     font-size: 14px;
+   }
+ }
 
-  label {
-    font-size: 13px;
-    font-weight: 600;
-  }
+ @media(max-width:505px) {
+   .report-form h2 {
+     font-size: 15px;
+     gap: 5px;
+     flex-direction: column;
+     padding-bottom: 5px;
+   }
 
-  .report-form input,
-  .report-form textarea {
-    padding: 10px;
-  }
+   label {
+     font-size: 13px;
+     font-weight: 600;
+   }
 
-  .button {
-    font-size: 14px;
-  }
-}
+   .report-form input,
+   .report-form textarea {
+     padding: 10px;
+   }
+
+   .button {
+     font-size: 14px;
+   }
+ }

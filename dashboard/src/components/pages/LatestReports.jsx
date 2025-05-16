@@ -106,16 +106,12 @@ const LatestReports = () => {
               <div className="report-title">{report.description}</div>
 
               <div className="report-meta">
-                <span>{report.district}, {report.sector}, {report.cell}</span>
+                <span>{report.province}, {report.district}, {report.sector}</span>
                 <span className="report-type">{report.crimeType}</span>
-                <div className="report-time">{formatDate(report.dateTime)}</div>
               </div>
-            </div>
 
-            {/* ✅ Show Solved if completed is true, regardless of isAccepted */}
-            {report.completed && (
-              <div className="solved-badge">Solved</div>
-            )}
+              <div className="report-date">{formatDate(report.dateTime)}</div>
+            </div>
           </div>
         ))}
       </div>
