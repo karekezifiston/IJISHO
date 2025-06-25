@@ -2,74 +2,78 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import './Navbar.css';
+import useWindowWidth from './useWindowWidth'; // adjust path if needed
 
 const Navbar = () => {
-  const { t, i18n } = useTranslation();
+  const { i18n } = useTranslation();
   const [lang, setLang] = useState(i18n.language);
+  const [showDashboardPopup, setShowDashboardPopup] = useState(false);
 
-  // 👇 NEW state for mobile menu
-  const [menuOpen, setMenuOpen] = useState(false);
+  const width = useWindowWidth();
+  const isMobile = width <= 768;
 
   const changeLanguage = (lng) => {
-    i18n.changeLanguage(lng).then(() => {
-      setLang(i18n.language);
-    });
+    i18n.changeLanguage(lng).then(() => setLang(i18n.language));
+  };
+  const toggleDashboardPopup = () => {
+    setShowDashboardPopup(!showDashboardPopup);
   };
 
+
   return (
-    <nav className="navbar">
-      <div className="logo">
-        <h2>Ijisho</h2>
-      </div>
+    <>
+      <nav className="navbar">
+        <div className="logo"><h2>Ijisho</h2></div>
 
-      {/* 👇 Burger Icon */}
-      <div className={`burger ${menuOpen ? 'open' : ''}`} onClick={() => setMenuOpen(!menuOpen)}>
-        {!menuOpen && (
-          <div className="custom-burger-icon">
-            <span></span>
-            <span></span>
-          </div>
-        )}
-        {menuOpen && '✕'}
-      </div>
+        <button className="dashboard-btn" onClick={toggleDashboardPopup}>Dashboards</button>
 
-
-      {/* 👇 Mobile Menu (nav-links + language switcher) */}
-      <ul className={`nav-links ${menuOpen ? 'mobile-menu' : ''}`}>
-        {/* <li>
-          <Link to="/" onClick={() => setMenuOpen(false)}>{t("home")}</Link>
-        </li>
-        <li>
-          <Link to="/about" onClick={() => setMenuOpen(false)}>{t("about")}</Link>
-        </li> */}
-        {/* 👇 Add language switcher inside burger dropdown */}
         <li className="mobile-lang">
-          <select
-            value={lang}
-            onChange={(e) => changeLanguage(e.target.value)}
-            className="lang-select"
-          >
-            <option value="rw">🇷🇼 Kinyarwanda</option>
-            <option value="en">🇬🇧 English</option>
-            <option value="fr">🇫🇷 Français</option>
+          <select value={lang} onChange={(e) => changeLanguage(e.target.value)} className="lang-select">
+            <option value="rw">🇷🇼 {isMobile ? 'RW' : 'Kinyarwanda'}</option>
+            <option value="en">🇬🇧 {isMobile ? 'GB' : 'English'}</option>
+            <option value="fr">🇫🇷 {isMobile ? 'FR' : 'Français'}</option>
           </select>
         </li>
-      </ul>
 
-      {/* 👇 Desktop language switcher (still visible on large screens) */}
-      <div className="language-switcher desktop-lang">
-        <select
-          value={lang}
-          onChange={(e) => changeLanguage(e.target.value)}
-          className="lang-select"
-        >
-          <option value="rw">🇷🇼 Kinyarwanda</option>
-          <option value="en">🇬🇧 English</option>
-          <option value="fr">🇫🇷 Français</option>
-        </select>
-      </div>
-    </nav>
+        <div className="language-switcher desktop-lang">
+          <select value={lang} onChange={(e) => changeLanguage(e.target.value)} className="lang-select">
+            <option value="rw">🇷🇼 {isMobile ? 'RW' : 'Kinyarwanda'}</option>
+            <option value="en">🇬🇧 {isMobile ? 'GB' : 'English'}</option>
+            <option value="fr">🇫🇷 {isMobile ? 'FR' : 'Français'}</option>
+          </select>
+        </div>
+      </nav>
 
+      {/* POPUP */}
+      {showDashboardPopup && (
+        <div className="dashboard-popup">
+          <div className="popup-content">
+            <h3>Select Dashboard</h3>
+            <a
+              href="https://ijisho-branches.onrender.com"
+              className="popup-link"
+
+              rel="noopener noreferrer"
+              onClick={() => setShowDashboardPopup(false)}
+            >
+              Branches
+            </a>
+
+            <a
+              href="https://ijisho-dashboard.onrender.com"
+              className="popup-link"
+  
+              rel="noopener noreferrer"
+              onClick={() => setShowDashboardPopup(false)}
+            >
+             Main Branches
+            </a>
+
+            <button className="close-btn" onClick={() => setShowDashboardPopup(false)}>Close</button>
+          </div>
+        </div>
+      )}
+    </>
   );
 };
 
