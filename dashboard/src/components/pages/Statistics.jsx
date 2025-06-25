@@ -36,7 +36,7 @@ const Statistics = () => {
 
   const fetchStatistics = async () => {
     try {
-      const response = await fetch('http://localhost:5000/api/reports/statistics');
+      const response = await fetch('https://ijisho-backend.onrender.com/api/reports/statistics');
       const data = await response.json();
       setStats({
         total: data.totalReports || 0,

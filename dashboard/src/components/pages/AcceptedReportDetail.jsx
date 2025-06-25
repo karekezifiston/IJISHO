@@ -8,14 +8,14 @@ const AcceptedReportDetail = () => {
   const [isFullScreen, setIsFullScreen] = useState(false);
 
   useEffect(() => {
-    fetch(`http://localhost:5000/api/reports/${id}`)
+    fetch(`https://ijisho-backend.onrender.com/api/reports/${id}`)
       .then(res => res.json())
       .then(data => setReport(data))
       .catch(err => console.error('Failed to fetch report:', err));
   }, [id]);
 
   const handleDoneReport = () => {
-    fetch(`http://localhost:5000/api/reports/${id}/done`, {
+    fetch(`https://ijisho-backend.onrender.com/api/reports/${id}/done`, {
       method: 'PATCH',
       headers: { 'Content-Type': 'application/json' },
     })

@@ -33,7 +33,7 @@ const LatestReports = () => {
 
     for (const reportId of selectedReports) {
       try {
-        await fetch(`http://localhost:5000/api/reports/${reportId}`, {
+        await fetch(`https://ijisho-backend.onrender.com/api/reports/${reportId}`, {
           method: 'DELETE',
         });
       } catch (err) {
@@ -50,7 +50,7 @@ const LatestReports = () => {
 
     for (const reportId of selectedReports) {
       try {
-        await fetch(`http://localhost:5000/api/reports/${reportId}/accept`, {
+        await fetch(`https://ijisho-backend.onrender.com/api/reports/${reportId}/accept`, {
           method: 'PATCH',
         });
       } catch (err) {

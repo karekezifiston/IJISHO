@@ -35,7 +35,7 @@ const DoneReports = () => {
 
   const handleMarkUncomplete = () => {
     selectedReports.forEach((reportId) => {
-      fetch(`http://localhost:5000/api/reports/${reportId}/done`, {
+      fetch(`https://ijisho-backend.onrender.com/api/reports/${reportId}/done`, {
         method: 'PATCH',
       })
         .then((res) => res.json())

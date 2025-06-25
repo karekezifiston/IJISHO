@@ -8,7 +8,7 @@ const ReportDetail = () => {
   const [isFullScreen, setIsFullScreen] = useState(false);
 
   useEffect(() => {
-    fetch(`http://localhost:5000/api/reports/${id}`)
+    fetch(`https://ijisho-backend.onrender.com/api/reports/${id}`)
       .then(res => res.json())
       .then(data => setReport(data))
       .catch(err => console.error('Failed to fetch report:', err));
@@ -18,7 +18,7 @@ const ReportDetail = () => {
   const handleCloseFullScreen = () => setIsFullScreen(false);
 
   const handleAcceptReport = () => {
-    fetch(`http://localhost:5000/api/reports/${id}/accept`, {
+    fetch(`https://ijisho-backend.onrender.com/api/reports/${id}/accept`, {
       method: 'PATCH',
       headers: { 'Content-Type': 'application/json' },
     })

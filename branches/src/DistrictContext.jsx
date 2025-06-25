@@ -16,7 +16,7 @@ export const DistrictProvider = ({ children }) => {
     }
 
     // Fetch all reports once
-    fetch('http://localhost:5000/api/reports')
+    fetch('https://ijisho-backend.onrender.com/api/reports')
       .then((res) => res.json())
       .then((data) => setAllReports(data))
       .catch((err) => console.error('Failed to fetch reports:', err));

@@ -138,7 +138,7 @@ const ReportForm = () => {
     }
 
     try {
-      const response = await fetch('http://localhost:5000/api/report', {
+      const response = await fetch('https://ijisho-backend.onrender.com/api/report', {
         method: 'POST',
         body: formDataToSend,
       });

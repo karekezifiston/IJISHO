@@ -39,7 +39,7 @@ const AcceptedReports = () => {
       setSelectedReports([]);
 
       for (const reportId of selectedReports) {
-        await fetch(`http://localhost:5000/api/reports/${reportId}`, { method: 'DELETE' });
+        await fetch(`https://ijisho-backend.onrender.com/api/reports/${reportId}`, { method: 'DELETE' });
       }
     } catch (error) {
       console.error('Failed to delete reports:', error);
@@ -49,7 +49,7 @@ const AcceptedReports = () => {
   const handleDecline = async () => {
     try {
       for (const reportId of selectedReports) {
-        await fetch(`http://localhost:5000/api/reports/${reportId}/unaccept`, {
+        await fetch(`https://ijisho-backend.onrender.com/api/reports/${reportId}/unaccept`, {
           method: 'PATCH',
         });
       }
@@ -69,7 +69,7 @@ const AcceptedReports = () => {
   const handleMarkComplete = async () => {
     try {
       for (const reportId of selectedReports) {
-        await fetch(`http://localhost:5000/api/reports/${reportId}/done`, {
+        await fetch(`https://ijisho-backend.onrender.com/api/reports/${reportId}/done`, {
           method: 'PATCH',
         });
       }

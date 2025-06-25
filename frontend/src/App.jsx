@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Navbar from './Components/Navbar';
-import ReportForm from './components/ReportForm';
+import ReportForm from './Components/ReportForm';
 import About from './Components/About';
 import Footer from './Components/Footer';
 

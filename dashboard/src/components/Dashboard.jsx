@@ -7,7 +7,7 @@ const Dashboard = () => {
   useEffect(() => {
     const fetchReports = async () => {
       try {
-        const response = await fetch('http://localhost:5000/api/reports'); // Fetch reports
+        const response = await fetch('https://ijisho-backend.onrender.com/api/reports'); // Fetch reports
         const data = await response.json();
 
         // Sort by newest first
